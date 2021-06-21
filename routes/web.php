@@ -22,6 +22,7 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Auth::routes();
 Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], function () {
     Route::get('/', 'Inkubator\HomeController@index')->name('inkubator.home');
+    Route::get('/profile', 'Inkubator\ProfileController@index')->name('inkubator.profile');
     Route::get('/event', 'Event\EventController@index')->name('inkubator.event-list');
     Route::get('/event/calendar', 'Event\EventController@calendar')->name('inkubator.event-calendar');
     Route::get('/event/create', 'Event\EventController@create')->name('inkubator.event.create');
