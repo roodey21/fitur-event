@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Inkubator;
 
 use Auth;
 use App\User;
-use App\Http\Controllers\Controller;
+use App\Inkubator;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -23,5 +24,21 @@ class ProfileController extends Controller
     {
         $data['data'] = User::where(['users.id' => Auth::user()->id]);
         return view('profile.index', $data);
+    }
+    public function edit()
+    {
+        $data = Inkubator::where(["user_id" => Auth::user()->id])->first();
+        return view('profile.edit', compact('data'));
+    }
+    public function update(Request $request)
+    {
+        $attr = $request->all();
+        // dd($attr);
+        $inkubator = Inkubator::where('user_id', Auth::user()->id)->first();
+        
+        $inkubator->update($attr);
+
+        return "success update your profile";
+        // return redirect()->to('/inkubator/profile');
     }
 }
