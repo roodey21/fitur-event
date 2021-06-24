@@ -23,7 +23,7 @@
                             <div class="input-group mb-3">
                                 <div class="custom-file">
                                     <label class="custom-file-label" for="foto">Choose file</label>
-                                    <input class="custom-file-input" id="foto" type="file"  name="foto" onchange="preview_image(event)" accept="image/*" />
+                                    <input class="custom-file-input" id="foto" type="file"  name="photo" onchange="preview_image(event)" accept="image/*" />
                                 </div>
                             </div>
                         </div>

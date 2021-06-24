@@ -20,10 +20,10 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Inkubator $inkubator)
     {
-        $data['data'] = User::where(['users.id' => Auth::user()->id]);
-        return view('profile.index', $data);
+        $data = Inkubator::where(["user_id" => Auth::user()->id])->first();
+        return view('profile.index', compact('data'));
     }
     public function edit()
     {
@@ -32,13 +32,45 @@ class ProfileController extends Controller
     }
     public function update(Request $request)
     {
-        $attr = $request->all();
+        // $attr = $request->all();
         // dd($attr);
         $inkubator = Inkubator::where('user_id', Auth::user()->id)->first();
-        
-        $inkubator->update($attr);
+        $tujuan_upload = 'img/profile/inkubator/';
 
-        return "success update your profile";
-        // return redirect()->to('/inkubator/profile');
+        if ($inkubator) {
+            // jika sudah ada data foto pengguna dan ingin menggantinya
+            if ($inkubator->photo && $request->file('photo')) {
+                \File::delete($tujuan_upload . $inkubator->photo);
+                $file = $request->photo;
+                $filename = time() . \Str::slug($request->get('nama')) . '.' . $file->getClientOriginalExtension();
+                $file->move($tujuan_upload, $filename);
+            } else {
+                $filename = $inkubator->photo;
+            }
+        } else {
+            $file = $request->photo;
+            $filename = time() . \Str::slug($request->get('nama')) . '.' . $file->getClientOriginalExtension();
+            $file->move($tujuan_upload, $filename);
+        }
+
+        Inkubator::updateOrCreate(
+            ['user_id'  =>  Auth::user()->id],
+            [
+                'nama' =>  $request->nama,
+                'alamat' =>  $request->alamat,
+                'kontak' =>  $request->kontak,
+                'photo' =>  $filename,
+                'deskripsi' =>  $request->description,
+                'status' =>  '0',
+            ],
+        );
+
+        $notification = array(
+            'message' => 'Profile Berhasil Diupdate',
+            'alert-type' => 'success'
+        );
+
+        // return "success update your profile";
+        return redirect()->to('/inkubator/profile')->with($notification);
     }
 }
