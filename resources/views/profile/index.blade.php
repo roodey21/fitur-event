@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <hr />
-                    <button class="btn btn-success btn-sm btn-block">Ubah Info</button>
+                    <a href="{{ route("inkubator.edit") }}" class="btn btn-success"><span class="px-3">Ubah Info</span></a>
                 </div>
             </div>
         </div>

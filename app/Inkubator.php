@@ -9,7 +9,8 @@ use App\Event;
 
 class Inkubator extends Model
 {
-    protected $table = 'inkubators';
+    // protected $table = 'inkubators';
+    protected $guarded = ['user_id'];
 
     public function events()
     {
