@@ -11,20 +11,29 @@
 				  <h3>Event</h3>
 				</div>
 				<div class="col-md-4 text-right">
+                @role('inkubator')
                     <a href="{{route('inkubator.event-calendar')}}" data-toggle="tooltip" data-placement="top" title="Calendar"><button class="btn btn-primary custom-btn btn-sm"><i class="i-Calendar-4" ></i></button></a>
+                @endrole
+                @role('mentor')
+                    <a href="{{route('mentor.event-calendar')}}" data-toggle="tooltip" data-placement="top" title="Calendar"><button class="btn btn-primary custom-btn btn-sm"><i class="i-Calendar-4" ></i></button></a>
+                @endrole
+                @role('tenant')
+                    <a href="{{route('tenant.event-calendar')}}" data-toggle="tooltip" data-placement="top" title="Calendar"><button class="btn btn-primary custom-btn btn-sm"><i class="i-Calendar-4" ></i></button></a>
+                @endrole
 				</div>
 			  </div>
 			</div>
+            @role('inkubator')
 			<div class="card-body">
 				<div class="create_event_wrap">
                     <div class="d-flex justify-content-center">
                         <button class="btn btn-outline-primary btn-block"data-toggle="modal" data-target="#inputModal">Buat Event</button>
-                </div>
+                    </div>
 				</div>
 			</div>
+            @endrole
 		</div>
         {{-- Tambah event end --}}
-
         {{-- Menu Filter --}}
         @role(['inkubator', 'mentor'])
         <div class="card mb-4">
@@ -105,7 +114,9 @@
                                                 <th scope="col">Tanggal Selesai</th>
                                                 <th scope="col">Status</th>
                                                 <th scope="col">Latest Update</th>
+                                                @role('inkubator')
                                                 <th scope="col">Action</th>
+                                                @endrole
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -117,8 +128,15 @@
                                                     @role('inkubator')
                                                         <div class="font-weight-bold"><a href="/inkubator/event/{{ $item->slug }}">{{ $item->title }}</a></div>
                                                     @endrole
+                                                    @role('mentor')
+                                                        <div class="font-weight-bold"><a href="/mentor/event/{{ $item->slug }}">{{ $item->title }}</a></div>
+                                                    @endrole
+                                                    @role('tenant')
+                                                        <div class="font-weight-bold"><a href="/tenant/event/{{ $item->slug }}">{{ $item->title }}</a></div>
+                                                    @endrole
                                                     <div class="text-muted"></div>
                                                 </td>
+                                                @role('mentor', 'inkubator')
                                                 <td class="custom-align">
                                                     <div class="btn-group">
                                                         @if ( $item->priority->id == 1 )
@@ -143,6 +161,7 @@
                                                         @endif
                                                     </div>
                                                 </td>
+                                                @endrole
                                                 <td class="custom-align">
                                                     <div class="d-inline-flex align-items-center calendar align-middle"><i class="i-Calendar-4"></i><span>{{ $item->start_date->format("d M Y") }}</span></div><br>
                                                     <div class="d-inline-flex align-items-center calendar align-middle"><i class="i-Clock"></i><span>{{ $item->start_time->format("H:i") }}</span></div>
@@ -166,13 +185,14 @@
                                     </table>
                         <!--  end of task manager table -->
                                 </div>
-                    </div>
+                        </div>
                     <!--  end of content area -->
                 </div>
-	</div>
+	    </div>
     </div>
 </div>
 
+@role('inkubator')
 <!-- Modal -->
 <div class="modal fade" id="inputModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -271,6 +291,7 @@
     </div>
 </div>
 <!-- Modal end -->
+@endrole
 @endsection
 
 @section('css')

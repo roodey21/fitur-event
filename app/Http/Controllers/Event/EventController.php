@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Event;
 
 use Auth;
-use App\{Event, Priority};
+use App\{Event, Priority, Tenant};
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
 use App\Http\Controllers\Controller;
@@ -58,12 +58,75 @@ class EventController extends Controller
         return view('event.index', compact('event', 'priority', 'exp', 'title'));
     }
 
+    public function indexMentor(Request $request)
+    {
+        if(request()->has('filter')){
+            if(array_key_exists('between', $request->filter)){
+                $test = request()->filter['between'];
+                $exp = explode(',', $test);
+            }else{
+                $exp = null;
+            }
+
+            if(array_key_exists('title', $request->filter)){
+                $title = request()->filter['title'];
+            }else{
+                $title = null;
+            }
+        }else{
+            $exp = null;
+            $title = null;
+        }
+
+        $priority = Priority::orderBy('name', 'ASC')->get();
+        $event = QueryBuilder::for(Event::class)
+            ->allowedFilters([
+                AllowedFilter::partial('title'),
+                AllowedFilter::exact('priority', 'priority_id'),
+                AllowedFilter::exact('publish', 'publish'),
+                AllowedFilter::scope('between', 'dateBetween'),
+            ])->where('inkubator_id', '=', Auth::user()->inkubator_id)
+            ->latest()->paginate();
+        return view('event.index', compact('event', 'priority', 'exp', 'title'));
+    }
+
+    public function indexTenant(Request $request)
+    {
+
+        $tenant = Tenant::where('user_id', auth()->user()->id)->first();
+        $event = Event::where([
+            ['inkubator_id', '=', Auth::user()->inkubator_id],
+            ['priority_id', '=', $tenant->priority_id],
+            ['publish', '=', 1]
+        ])->latest()->paginate();
+
+        return view('/event/index', compact('event'));
+    }
+
     public function calendar()
     {
         $priority = Priority::all();
         $event = Event::all();
         return view('event.calendar', compact('event', 'priority'));
     }
+   
+    public function calendarMentor()
+    {
+        $event = Event::where('inkubator_id', '=', Auth::user()->inkubator_id)->get();
+        return view('event.calendar', compact('event'));
+    }
+
+    public function calendarTenant()
+    {
+        $tenant = Tenant::where('user_id', auth()->user()->id)->first();
+        $event = Event::where([
+            ['inkubator_id', '=', Auth::user()->inkubator_id],
+            ['priority_id', '=', $tenant->priority_id],
+            ['publish', '=', 1]
+        ])->get();
+        return view('event.calendar', compact('event'));
+    }
+
 
     public function show(Event $event)
     {
@@ -122,6 +185,8 @@ class EventController extends Controller
     public function update(EventRequest $request, Event $event)
     {
         $attr = $request->all();
+        $photo = $request->file('foto');
+        dd($photo);
 
         if ($request->file('foto')) {
             \Storage::delete($event->foto);

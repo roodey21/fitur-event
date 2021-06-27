@@ -32,25 +32,16 @@ class ProfileController extends Controller
     }
     public function update(Request $request)
     {
-        // $attr = $request->all();
-        // dd($attr);
         $inkubator = Inkubator::where('user_id', Auth::user()->id)->first();
         $tujuan_upload = 'img/profile/inkubator/';
-
-        if ($inkubator) {
-            // jika sudah ada data foto pengguna dan ingin menggantinya
-            if ($inkubator->photo && $request->file('photo')) {
-                \File::delete($tujuan_upload . $inkubator->photo);
-                $file = $request->photo;
-                $filename = time() . \Str::slug($request->get('nama')) . '.' . $file->getClientOriginalExtension();
-                $file->move($tujuan_upload, $filename);
-            } else {
-                $filename = $inkubator->photo;
-            }
-        } else {
+        // jika sudah ada data foto pengguna dan ingin menggantinya
+        if ($inkubator->photo && $request->file('photo')) {
+            \File::delete($tujuan_upload . $inkubator->photo);
             $file = $request->photo;
             $filename = time() . \Str::slug($request->get('nama')) . '.' . $file->getClientOriginalExtension();
             $file->move($tujuan_upload, $filename);
+        } else {
+            $filename = $inkubator->photo;
         }
 
         Inkubator::updateOrCreate(
@@ -64,7 +55,7 @@ class ProfileController extends Controller
                 'status' =>  '0',
             ],
         );
-
+        
         $notification = array(
             'message' => 'Profile Berhasil Diupdate',
             'alert-type' => 'success'
