@@ -136,7 +136,7 @@
                                                     @endrole
                                                     <div class="text-muted"></div>
                                                 </td>
-                                                @role('mentor', 'inkubator')
+                                                @role(['mentor', 'inkubator'])
                                                 <td class="custom-align">
                                                     <div class="btn-group">
                                                         @if ( $item->priority->id == 1 )
@@ -171,7 +171,14 @@
                                                     <div class="d-inline-flex align-items-center calendar align-middle"><i class="i-Clock"></i><span>{{ $item->end_time->format("H:i") }}</span></div>
                                                 </td>
                                                 <td class="custom-align">
-                                                    {!! $item->publish == 1 ? '<button class="btn btn-sm btn-primary">Published</button>' : '<button class="btn btn-sm btn-warning">Draft</button>' !!}
+                                                    @if ($item->publish == 2)
+                                                    <button class="btn btn-sm btn-primary">Finished</button>
+                                                    @elseif ($item->publish == 1)
+                                                    <button class="btn btn-sm btn-primary">Published</button>
+                                                    @elseif ($item->publish == 0)
+                                                    <button class="btn btn-sm btn-primary">Draft</button>
+                                                    @endif
+                                                    {{-- {!! $item->publish == 1 ? '<button class="btn btn-sm btn-primary">Published</button>' : '<button class="btn btn-sm btn-warning">Draft</button>' !!} --}}
                                                 </td>
                                                 <td class="custom-align">
                                                     <div class="d-inline-flex align-items-center calendar align-middle"><i class="i-Calendar-4"></i><span></span></div>
@@ -265,6 +272,21 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label for="event_type">Tipe Event</label>
+                            <select class="form-control" name="event_type" id="event_type">
+                                <option value="offline">offline</option>
+                                <option value="online">online</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="location" id="locationLabel">Lokasi Event</label>
+                            <div class="input-group">
+                                <input name="location" placeholder="lokasi event" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
                             <label for="priority">Priority</label>
                             <select class="form-control" name="priority_id" id="priority_id">
                                 @foreach ($priority as $prio)
@@ -275,6 +297,7 @@
                         <div class="form-group col-md-6">
                             <label for="publish">Publish</label>
                             <select name="publish" class="form-control" id="publish">
+                                <option value="2">Finished</option>
                                 <option value="1">Publish</option>
                                 <option value="0">Draft</option>
                             </select>
@@ -329,9 +352,7 @@
         
     $(function () {
         @if(Session::has('errors'))
-
-        $('#inputModal').modal('show');
-        
+            $('#inputModal').modal('show');
         @endif
 
         $('#inputModal').appendTo("body") 
@@ -377,6 +398,20 @@
             var fileName = $(this).val().split("\\").pop();
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
+
+        $('#event_type').change(function() {
+            var type = $(this).val();
+            if(type == 'online') {
+                $("#locationLabel").text("Link Event");
+                $('input[name="location"]').prop("disabled", true);
+                // var title = "Link Event";
+            }
+            else if(type == 'offline') {
+                $("#locationLabel").text("Detail Alamat");
+                $('input[name="location"]').prop("disabled", false);
+                // var title = "Detail Alamat";
+            }
+        });;
     });
 
     $(function() {
