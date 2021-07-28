@@ -11,7 +11,8 @@
     </div> --}}
     @role('inkubator')
     <div class="card user-profile mb-4">
-        <div class="user-info"><img class="profile-picture avatar-lg" src="{{ asset("/img/profile/inkubator/" . $data->photo) }}" alt="" />
+        <div class="user-info">
+            <img class="profile-picture avatar-lg" src="{{asset('img/profile/inkubator/'. $data->photo)}}" alt="" />
             <p class="m-0 text-24">{{ $data->nama }}</p>
             <p class="text-muted m-0">Digital Marketer</p>
         </div>

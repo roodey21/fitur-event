@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Inkubator;
 
 use Auth;
+use File;
 use App\User;
 use App\Inkubator;
 use Illuminate\Http\Request;
@@ -33,15 +34,17 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $inkubator = Inkubator::where('user_id', Auth::user()->id)->first();
-        $tujuan_upload = 'img/profile/inkubator/';
-        // jika sudah ada data foto pengguna dan ingin menggantinya
-        if ($inkubator->photo && $request->file('photo')) {
-            \File::delete($tujuan_upload . $inkubator->photo);
-            $file = $request->photo;
-            $filename = time() . \Str::slug($request->get('nama')) . '.' . $file->getClientOriginalExtension();
-            $file->move($tujuan_upload, $filename);
+
+        $fileName = $inkubator->photo;
+
+        if ($request->has('photo')) {
+            \File::delete('img/profile/inkubator/' . $inkubator->photo);
+            $file = $request->file('photo');
+            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            $file->move('img/profile/inkubator/', $fileName);
         } else {
-            $filename = $inkubator->photo;
+            $fileName = $inkubator->photo;
         }
 
         Inkubator::updateOrCreate(
@@ -50,12 +53,12 @@ class ProfileController extends Controller
                 'nama' =>  $request->nama,
                 'alamat' =>  $request->alamat,
                 'kontak' =>  $request->kontak,
-                'photo' =>  $filename,
+                'photo' =>  $fileName,
                 'deskripsi' =>  $request->description,
                 'status' =>  '0',
             ],
         );
-        
+
         $notification = array(
             'message' => 'Profile Berhasil Diupdate',
             'alert-type' => 'success'
