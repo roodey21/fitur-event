@@ -19,7 +19,7 @@ class CreateInkubatorsTable extends Migration
             $table->text('alamat');
             $table->string('kontak');
             $table->text('description');
-            $table->string('photo');
+            $table->string('photo')->default('default.jpg');
             $table->enum('status', [1,0]);
             $table->timestamps();
         });

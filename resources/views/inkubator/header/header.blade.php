@@ -1,3 +1,4 @@
+{{-- <div class="sticky-top"> --}}
 	<header class="main-header bg-white d-flex justify-content-between p-2">
 		<div class="header-toggle">
 			<div class="menu-toggle mobile-menu-icon">
@@ -23,3 +24,4 @@
 			@csrf
 		</form>
 	</header>
+{{-- </div> --}}
