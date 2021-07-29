@@ -43,23 +43,38 @@
             </div>
           </div>
           <div class="row">
-          <div class="form-group col-md-6">
-            <label for="priority">Priority</label>
-            <select class="form-control" name="priority_id" id="priority_id">
-              <option value="0">--!!--</option>
-              @foreach ($priority as $prio)
-                  <option value="{{ $prio->id }}" {{ $event->priority_id == $prio->id ? ' selected' : '' }}>{{ $prio->name }}</option>
-              @endforeach
-            </select>
+              <div class="form-group col-md-6">
+                  <label for="type">Jenis Event</label>
+                  <select name="type" id="type" class="form-control">
+                      <option value="offline"  {{ $event->type == 'offline' ? ' selected' : '' }}>Offline</option>
+                      <option value="offline" {{ $event->type == 'online' ? ' selected' : '' }}>Online</option>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
+                <label for="location" id="locationLabel">Lokasi Event</label>
+                <div class="input-group">
+                    <input name="location" placeholder="lokasi event" class="form-control" required value="{{ $event->location }}">
+                </div>
+              </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="publish">Publish</label>
-            <select name="publish" class="form-control" id="publish">
-              <option value="1" {{ $event->publish == 1 ? ' selected ' : '' }}>Publish</option>
-              <option value="0" {{ $event->publish == 0 ? ' selected ' : '' }}>Draft</option>
-            </select>
+          <div class="row">
+            <div class="form-group col-md-6">
+                <label for="priority">Priority</label>
+                <select class="form-control" name="priority_id" id="priority_id">
+                <option value="0">--!!--</option>
+                @foreach ($priority as $prio)
+                    <option value="{{ $prio->id }}" {{ $event->priority_id == $prio->id ? ' selected' : '' }}>{{ $prio->name }}</option>
+                @endforeach
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="publish">Publish</label>
+                <select name="publish" class="form-control" id="publish">
+                <option value="1" {{ $event->publish == 1 ? ' selected ' : '' }}>Publish</option>
+                <option value="0" {{ $event->publish == 0 ? ' selected ' : '' }}>Draft</option>
+                </select>
+            </div>
           </div>
-        </div>
           <br>
           <div class="d-flex justify-content-end">
             <button type="submit" class="btn btn-primary">Update</button>
@@ -85,25 +100,38 @@
  @endsection
 
 @section('js')
-  <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
-  <script>
-      CKEDITOR.replace('description');
+<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('description');
 
-      $(".custom-file-input").on("change", function() {
-  var fileName = $(this).val().split("\\").pop();
-  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-});
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
 
-    function preview_image(event) 
+    function preview_image(event)
     {
-    var reader = new FileReader();
-    reader.onload = function()
+        var reader = new FileReader();
+        reader.onload = function()
     {
-      var output = document.getElementById('output_image');
-      output.src = reader.result;
+        var output = document.getElementById('output_image');
+        output.src = reader.result;
     }
-    reader.readAsDataURL(event.target.files[0]);
+        reader.readAsDataURL(event.target.files[0]);
     }
+
+    // $('#type').change(function() {
+    //     var type = $(this).val();
+    //     if(type == 'online') {
+    //         $("#locationLabel").text("Link Event");
+    //         // $('input[name="location"]').prop("disabled", true);
+    //         // var title = "Link Event";
+    //     }
+    //     else if(type == 'offline') {
+    //         $("#locationLabel").text("Detail Alamat");
+    //         // $('input[name="location"]').prop("disabled", false);
+    //         // var title = "Detail Alamat";
+    //     }
+    // });
 </script>
-  </script>
 @endsection

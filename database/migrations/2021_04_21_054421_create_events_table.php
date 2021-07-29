@@ -18,6 +18,8 @@ class CreateEventsTable extends Migration
             $table->string('title');
             $table->string('slug');
             $table->string('foto');
+            $table->enum('type', ['online','offline']);
+            $table->string('location');
             $table->foreignId('priority_id');
             $table->foreignId('author_id');
             $table->foreignId('inkubator_id');
