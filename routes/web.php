@@ -18,6 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/front', function () {
+    return view('layouts.front');
+})->name('front.home');
 
 Auth::routes();
 Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], function () {
