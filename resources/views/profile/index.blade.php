@@ -10,7 +10,9 @@
         </ul>
     </div> --}}
     @role('inkubator')
-    <div class="card user-profile mb-4">
+    <div class="separator-breadcrumb border-top"></div>
+    <div class="card user-profile o-hidden mb-4">
+        <div class="header-cover" style="background-image: url('{{ asset("theme/images/photo-wide-2.jpg")}}')"></div>
         <div class="user-info">
             <img class="profile-picture avatar-lg" src="{{asset('img/profile/inkubator/'. $data->photo)}}" alt="" />
             <p class="m-0 text-24">{{ $data->nama }}</p>
@@ -45,8 +47,10 @@
     </div>
     @endrole
     @role('mentor')
-    <div class="card user-profile mb-4">
-        <div class="user-info"><img class="profile-picture avatar-lg" src="{{ asset("/img/profile/mentor/" . $data->photo) }}" alt="" />
+    <div class="card user-profile o-hidden mb-4">
+        <div class="header-cover" style="background-image: url('{{ asset("theme/images/photo-wide-2.jpg")}}')"></div>
+        <div class="user-info">
+            <img class="profile-picture avatar-lg" src="{{ asset("/img/profile/mentor/" . $data->photo) }}" alt="" />
             <p class="m-0 text-24">{{ $data->nama }}</p>
             <p class="text-muted m-0">Digital Marketer</p>
         </div>

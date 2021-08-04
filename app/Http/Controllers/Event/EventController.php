@@ -86,7 +86,7 @@ class EventController extends Controller
                 AllowedFilter::exact('publish', 'publish'),
                 AllowedFilter::scope('between', 'dateBetween'),
             ])->where('inkubator_id', '=', Auth::user()->inkubator_id)
-            ->latest()->paginate();
+            ->latest()->paginate();       
         return view('event.index', compact('event', 'priority', 'exp', 'title'));
     }
 

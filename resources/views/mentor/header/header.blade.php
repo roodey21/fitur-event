@@ -11,11 +11,10 @@
 			<!-- Grid menu Dropdown-->
 			<div class="dropdown dropleft"><i class="i-Safe-Box text-muted header-icon" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<div class="menu-icon-grid"><a href="/"><i class="i-Shop-4"></i> Home</a>
-					<a href="https://siskubis.com/forum/public"><i class="i-Library"></i> Forum</a>
-					<a href="#"><i class="i-Speach-Bubble-3"></i> Chat</a>
-					<a href="#"><i class="i-Email"></i> Pesan</a>
-					<a href="#"><i class="i-Checked-User"></i> Profile</a><a href="{{ route('logout') }}"
+					<div class="menu-icon-grid">
+					<a href="/"><i class="i-Shop-4"></i> Home</a>
+					<a href="{{route('mentor.profile')}}"><i class="i-Checked-User"></i> Profile</a>
+					<a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="i-Ambulance"></i> Logout</a> </div>
 				</div>

@@ -28,6 +28,8 @@ class EventRequest extends FormRequest
             'foto' => 'image|mimes:jpg,png,jpeg|max:2048',
             'priority_id' => 'required',
             'description' => 'required',
+            'type' => 'required',
+            'location' => 'required',
             'publish' => 'required',
             'start_date' => 'required',
             'start_time' => 'required',

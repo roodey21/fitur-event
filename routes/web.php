@@ -38,6 +38,8 @@ Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], func
 Route::group(['prefix' => 'mentor', 'middleware' => ['role:mentor']], function () {
     Route::get('/', 'Mentor\HomeController@index')->name('mentor.home');
     Route::get('/profile', 'Mentor\ProfileController@index')->name('mentor.profile');
+    Route::get('/profile/create', 'Mentor\ProfileController@create')->name('mentor.profile.create');
+    Route::post('/profile/store', 'Mentor\ProfileController@store')->name('mentor.profile.store');
     Route::get('/profile/edit', 'Mentor\ProfileController@edit')->name('mentor.profile.edit');
     Route::post('/profile/update', 'Mentor\ProfileController@update')->name('mentor.profile.update');
     Route::get('/event', 'Event\EventController@indexMentor')->name('mentor.event-list');
