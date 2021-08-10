@@ -24,8 +24,47 @@ class ProfileController extends Controller
     public function index(Inkubator $inkubator)
     {
         $data = Inkubator::where(["user_id" => Auth::user()->id])->first();
-        return view('profile.index', compact('data'));
+        if ($data){
+            return view('profile.index', compact('data'));
+        } else {
+            return view('profile.create');
+        }
     }
+
+    public function create()
+    {
+       return view('profile.create');
+    }
+
+    public function store(Request $request)
+    {
+        $tujuan_upload = 'img/profile/inkubator/';
+        // jika sudah ada data foto pengguna dan ingin menggantinya
+            $file = $request->photo;
+            $filename = time() . \Str::slug($request->get('nama')) . '.' . $file->getClientOriginalExtension();
+            $file->move($tujuan_upload, $filename);
+
+        Inkubator::updateOrCreate(
+            ['user_id'  =>  Auth::user()->id],
+            [
+                'nama' =>  $request->nama,
+                'alamat' =>  $request->alamat,
+                'kontak' =>  $request->kontak,
+                'photo' =>  $filename,
+                'description' =>  $request->description,
+                'status' =>  '0',
+            ],
+        );
+        
+        $notification = array(
+            'message' => 'Profile Berhasil Diupdate',
+            'alert-type' => 'success'
+        );
+
+          // return "success update your profile";
+        return redirect()->to('/inkubator/profile')->with($notification);
+    }
+
     public function edit()
     {
         $data = Inkubator::where(["user_id" => Auth::user()->id])->first();
@@ -54,7 +93,7 @@ class ProfileController extends Controller
                 'alamat' =>  $request->alamat,
                 'kontak' =>  $request->kontak,
                 'photo' =>  $fileName,
-                'deskripsi' =>  $request->description,
+                'description' =>  $request->description,
                 'status' =>  '0',
             ],
         );

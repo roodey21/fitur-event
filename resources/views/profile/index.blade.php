@@ -118,3 +118,48 @@
     @endrole
 </div>
 @endsection
+
+@section('css')
+<link href="{{ asset('theme/css/plugins/toastr.css')}}" rel="stylesheet" />    
+@endsection
+
+@section('js')
+<script src="{{ asset('theme/js/plugins/toastr.min.js')}}"></script>
+<script src="{{ asset('theme/js/scripts/toastr.script.min.js')}}"></script>
+
+
+<script>
+
+toastr.options = {
+    "debug": false,
+    //   "positionClass": "toast-bottom-full-width",
+    "onclick": null,
+    "showMethod": "slideDown",
+    "hideMethod": "slideUp",
+    "timeOut": 2000,
+    "extendedTimeOut": 1000
+}
+
+@if(Session::has('message'))
+var type = "{{ Session::get('alert-type', 'info') }}";
+switch(type){
+    case 'info':
+        toastr.info("{{ Session::get('message') }}");
+        break;
+
+    case 'warning':
+        toastr.warning("{{ Session::get('message') }}");
+        break;
+
+    case 'success':
+        toastr.success("{{ Session::get('message') }}");
+        break;
+
+    case 'error':
+        toastr.error("{{ Session::get('message') }}");
+        break;
+}
+@endif
+
+</script>
+@endsection

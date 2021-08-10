@@ -65,7 +65,7 @@
     </div>
     <div class="separator-breadcrumb border-top"></div>
     @role('inkubator')
-    <form action="{{ route('inkubator.profile.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('inkubator.profile.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-4">
@@ -76,8 +76,8 @@
                             <label for="foto">File</label>
                             <div class="col">
                                 <div class="drop-zone" >
-									<span class="drop-zone__prompt" ><img src="{{asset('img/profile/inkubator/'. $data->photo)}}"></span>
-									<input type="file" name="photo" id="exampleInputFile" for="exampleInputFile" class="drop-zone__input" value="{{asset('img/profile/inkubator/'. $data->photo)}}">
+									<span class="drop-zone__prompt" ></span>
+									<input type="file" name="photo" id="exampleInputFile" for="exampleInputFile" class="drop-zone__input">
 								</div>
                             </div>
                     </div>
@@ -91,25 +91,25 @@
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="nama">Nama</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="nama" type="text" placeholder="nama" value="{{ $data->nama }}">
+                                <input class="form-control" name="nama" type="text" placeholder="nama">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="alamat">Alamat</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="alamat" type="text" placeholder="alamat" value="{{ $data->alamat }}">
+                                <input class="form-control" name="alamat" type="text" placeholder="alamat">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="kontak">Kontak</label>
                             <div class="col-sm-8">
-                                <input class="form-control" name="kontak" type="text" placeholder="kontak" value="{{ $data->kontak }}">
+                                <input class="form-control" name="kontak" type="text" placeholder="kontak">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" for="deskripsi">Deskripsi</label>
                             <div class="col-sm-8">
-                                <textarea name="description" id="deskripsi" cols="30" rows="10">{{ $data->description }}</textarea>
+                                <textarea name="description" id="deskripsi" cols="30" rows="10"></textarea>
                             </div>
                         </div>
                     </div>

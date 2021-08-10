@@ -266,7 +266,12 @@
                                 <div class="drop-zone">
                                     <span class="drop-zone__prompt">Drop file here or click to upload</span>
                                     <input type="file" name="foto" id="exampleInputFile" for="exampleInputFile"
-                                        class="drop-zone__input">
+                                        class="drop-zone__input" required>
+                                        @error('foto')
+                                        <div class="mt-2 text-danger">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                 </div>
                             </div>
                         </div>
@@ -383,8 +388,8 @@
 
     .drop-zone {
         /* max-width: 400px; */
-        width: 400px;
-        height: 400px;
+        width: 300px;
+        height: 300px;
         padding: 25px;
         display: flex;
         align-items: center;

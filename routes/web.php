@@ -23,6 +23,8 @@ Auth::routes();
 Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], function () {
     Route::get('/', 'Inkubator\HomeController@index')->name('inkubator.home');
     Route::get('/profile', 'Inkubator\ProfileController@index')->name('inkubator.profile');
+    Route::get('/profile/create', 'Inkubator\ProfileController@create')->name('inkubator.profile.create');
+    Route::post('/profile/store', 'Inkubator\ProfileController@store')->name('inkubator.profile.store');
     Route::get('/profile/edit', 'Inkubator\ProfileController@edit')->name('inkubator.profile.edit');
     Route::post('/profile/update', 'Inkubator\ProfileController@update')->name('inkubator.profile.update');
     Route::get('/event', 'Event\EventController@index')->name('inkubator.event-list');
