@@ -70,24 +70,21 @@
           {{-- <li><a href="#portfolio">Portfolio</a></li> --}}
           <li><a href="#team">Mentor</a></li>
           <li><a href="#event">Events</a></li>
-          {{-- <li class="drop-down"><a href="">Drop Down</a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="drop-down"><a href="#">Deep Drop Down</a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li> --}}
           <li><a href="#contact">Contact</a></li>
+          <li class="drop-down"><a href="#">My Account</a>
+            <ul>
+                @if (Route::has('login'))
+                    @auth
+                        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li><a href="" onclick="event.preventDefault();$('#form-logout').submit();">Logout</a></li>
+                        <form action="{{ route('logout') }}" id="form-logout" method="POST">@csrf</form>
+                    @else
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
+                    @endauth
+                @endif
+            </ul>
+          </li>
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -647,92 +644,40 @@
       </div>
     </section><!-- End Team Section -->
 
-    <!-- ======= Pricing Section ======= -->
-    {{-- <section id="pricing" class="pricing">
+    <!-- ======= Event Section ======= -->
+    <section id="event" class="event">
       <div class="container" data-aos="fade-up">
 
-        <div class="section-title">
-          <h2>Pricing</h2>
-          <h3>Check our <span>Pricing</span></h3>
-          <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+        <div class="section-title pb-5">
+          <h2>Event</h2>
+          <h3>Fatured <span>Event</span></h3>
+          <p>Join our featured upcoming event to catch up with investor, startup, or talent.</p>
         </div>
 
         <div class="row">
 
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="box">
-              <h3>Free</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li class="na">Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
+            @foreach ($events as $event)
+            <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="card shadow">
+                    <img src="{{ asset('storage/'.$event->foto) }}" alt="" class="card-img-top">
+                    <div class="card-body">
+                      <h6>
+                          <a>{{ $event->title }}</a>
+                      </h6>
+                      <i class="icofont-clock-time mr-2"></i><small class="">Waktu : {{ $event->start_date->format('d M Y') }} - {{ $event->end_date->format('d M Y') }}</small><br>
+                      <i class="icofont-location-pin mr-2"></i><small class="">Lokasi : {{ $event->type == 'offline' ? $event->location : 'location' }}</small><br>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-md-0" data-aos="fade-up" data-aos-delay="200">
-            <div class="box featured">
-              <h3>Business</h3>
-              <h4><sup>$</sup>19<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="300">
-            <div class="box">
-              <h3>Developer</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0" data-aos="fade-up" data-aos-delay="400">
-            <div class="box">
-              <span class="advanced">Advanced</span>
-              <h3>Ultimate</h3>
-              <h4><sup>$</sup>49<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
+            @endforeach
 
         </div>
-
+        <div class="text-center pt-5">
+            <button class="btn btn-primary">Load More <i class="icofont-arrow-right"></i></button>
+        </div>
       </div>
-    </section> --}}
-    <!-- End Pricing Section -->
+    </section>
+    <!-- End Event Section -->
 
     <!-- ======= Frequently Asked Questions Section ======= -->
     {{-- <section id="faq" class="faq section-bg">
@@ -807,7 +752,7 @@
     <!-- End Frequently Asked Questions Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <section id="contact" class="contact section-bg">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -818,7 +763,7 @@
 
         <div class="row" data-aos="fade-up" data-aos-delay="100">
           <div class="col-lg-6">
-            <div class="info-box mb-4">
+            <div class="info-box bg-light mb-4">
               <i class="bx bx-map"></i>
               <h3>LPPM - UNY</h3>
               <p>Karang Malang, Yogyakarta, Indonesia, Kode Pos :55281</p>
@@ -826,7 +771,7 @@
           </div>
 
           <div class="col-lg-3 col-md-6">
-            <div class="info-box  mb-4">
+            <div class="info-box bg-light mb-4">
               <i class="bx bx-envelope"></i>
               <h3>Email Us</h3>
               <p>lppm@uny.ac.id</p>
@@ -834,7 +779,7 @@
           </div>
 
           <div class="col-lg-3 col-md-6">
-            <div class="info-box  mb-4">
+            <div class="info-box bg-light  mb-4">
               <i class="bx bx-phone-call"></i>
               <h3>Call Us</h3>
               <p>(0274) 586168, (0274) 550839</p>

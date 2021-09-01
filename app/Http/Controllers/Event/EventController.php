@@ -109,7 +109,7 @@ class EventController extends Controller
         $event = Event::all();
         return view('event.calendar', compact('event', 'priority'));
     }
-   
+
     public function calendarMentor()
     {
         $event = Event::where('inkubator_id', '=', Auth::user()->inkubator_id)->get();
@@ -186,7 +186,6 @@ class EventController extends Controller
     {
         $attr = $request->all();
         $photo = $request->file('foto');
-        dd($photo);
 
         if ($request->file('foto')) {
             \Storage::delete($event->foto);

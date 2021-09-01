@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/front', function () {
     return view('layouts.front');
