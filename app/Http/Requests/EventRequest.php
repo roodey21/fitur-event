@@ -25,7 +25,7 @@ class EventRequest extends FormRequest
     {
         return [
             'title' => 'required|min:3',
-            'foto' => 'image|mimes:jpg,png,jpeg|max:2048',
+            'foto' => 'image | mimes:jpg,png,jpeg | max:2048',
             'priority_id' => 'required',
             'description' => 'required',
             'type' => 'required',

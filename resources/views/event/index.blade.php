@@ -266,7 +266,7 @@
                                 <div class="drop-zone">
                                     <span class="drop-zone__prompt">Drop file here or click to upload</span>
                                     <input type="file" name="foto" id="exampleInputFile" for="exampleInputFile"
-                                        class="drop-zone__input" required>
+                                        class="drop-zone__input" accept="image/*" required>
                                         @error('foto')
                                         <div class="mt-2 text-danger">
                                             {{ $message }}
