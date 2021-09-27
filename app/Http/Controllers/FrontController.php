@@ -15,4 +15,10 @@ class FrontController extends Controller
         $events = Event::latest()->take($this->maxPost)->get();
         return view('layouts.front2', compact('events'));
     }
+
+    public function event()
+    {
+        $events = Event::all();
+        return view('');
+    }
 }
