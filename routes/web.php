@@ -14,10 +14,14 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'FrontController@index');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/front', function () {
+    return view('layouts.front');
+})->name('front.home');
+Route::get('/front2', function () {
+    return view('layouts.front2');
+})->name('front2.home');
 
 Auth::routes();
 Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], function () {
