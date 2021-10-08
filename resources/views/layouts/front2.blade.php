@@ -665,7 +665,7 @@
                           <a>{{ $event->title }}</a>
                       </h6>
                       <i class="icofont-clock-time mr-2"></i><small class="">Waktu : {{ $event->start_date->format('d M Y') }} - {{ $event->end_date->format('d M Y') }}</small><br>
-                      <i class="icofont-location-pin mr-2"></i><small class="">Lokasi : {{ $event->type == 'offline' ? $event->location : 'location' }}</small><br>
+                      <i class="icofont-location-pin mr-2"></i><small class="">Lokasi : {{ $event->type == 'offline' ? $event->location : 'online' }}</small><br>
                     </div>
                 </div>
             </div>

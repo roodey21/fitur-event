@@ -19,6 +19,9 @@ Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/front', function () {
     return view('layouts.front');
 })->name('front.home');
+Route::get('/event', function () {
+    return view('front.event');
+})->name('front.event');
 Route::get('/front2', function () {
     return view('layouts.front2');
 })->name('front2.home');
