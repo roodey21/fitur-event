@@ -1,8 +1,9 @@
 <?php
 
+use Livewire\ListEvent;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-
+use Livewire\{EventShow, EventToday};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', 'FrontController@index');
+// Route::get('/event', 'FrontController@event');
+Route::view('/modal', 'layouts.new');
+Route::get('/coba', ListEvent::class); //index
+Route::get('/coba2', EventToday::class);
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/front', function () {
     return view('layouts.front');

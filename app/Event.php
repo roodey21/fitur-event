@@ -21,4 +21,11 @@ class Event extends Model
     {
         return $query->whereBetween('start_date', [$start, $end]);
     }
+    public function scopesearch($query, $term)
+    {
+        $term = "%$term%";
+        $query->where(function ($query) use ($term) {
+            $query->Where('title', 'Like', $term);
+        });
+    }
 }
