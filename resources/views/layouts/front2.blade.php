@@ -67,8 +67,8 @@
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
-                    <li class="active"><a href="/">Home</a></li>
-                    <li><a href="/coba" class="">Events</a></li>
+                    <li class="{{ (request()->is('/')) ? 'active':'' }}"><a href="/">Home</a></li>
+                    <li class="{{ (request()->is('coba*')) ? 'active':'' }}"><a href="/coba" class="">Events</a></li>
                     <li class="drop-down"><a href="#">My Account</a>
                         <ul>
                             @if (Route::has('login'))

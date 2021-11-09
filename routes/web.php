@@ -15,10 +15,11 @@ use Livewire\{EventShow, EventToday};
 |
 */
 
-Route::get('/', 'FrontController@index');
+// Route website frontend
+Route::get('/', 'FrontController@index'); // halaman home
+Route::get('/coba', ListEvent::class); // halaman event
 // Route::get('/event', 'FrontController@event');
 Route::view('/modal', 'layouts.new');
-Route::get('/coba', ListEvent::class); //index
 Route::get('/coba2', EventToday::class);
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 Route::get('/front', function () {
@@ -27,9 +28,9 @@ Route::get('/front', function () {
 Route::get('/event', function () {
     return view('front.event');
 })->name('front.event');
-Route::get('/front2', function () {
-    return view('layouts.front2');
-})->name('front2.home');
+// Route::get('/front2', function () {
+//     return view('layouts.front2');
+// })->name('front2.home');
 
 Auth::routes();
 Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], function () {

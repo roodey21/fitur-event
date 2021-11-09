@@ -1,9 +1,13 @@
-<div>
+{{-- tambahin ini bang biar nggak kepotong bagian atasnya --}}
+<section class="breadcrumbs"></section>
+{{-- sama div dikasih class mt-4 biar ada sedikit space antar section --}}
+<div class="mt-4">
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+    {{-- <div class="span" style=""></div> --}}
     <div class="container">
         <div class="section-title pb-5">
             <h2>Event</h2>
-            <h3>Fatured <span>Event</span></h3>
+            <h3>Featured <span>Event</span></h3>
             <p>Join our featured upcoming event to catch up with investor, startup, or talent.</p>
         </div>
         {{-- ini adalah bagian dari list event --}}
