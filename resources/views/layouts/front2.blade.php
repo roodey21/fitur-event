@@ -25,11 +25,10 @@
     <link href="{{ asset('frontend2/vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend2/vendor/venobox/venobox.css') }}" rel="stylesheet">
     <link href="{{ asset('frontend2/vendor/aos/aos.css') }}" rel="stylesheet">
-
     <!-- Template Main CSS File -->
     <link href="{{ asset('frontend2/css/style.css') }}" rel="stylesheet">
+    <script src="{{asset('js/app.js')}}" defer></script>
     @livewireStyles
-
     <!-- =======================================================
   * Template Name: BizLand - v1.2.1
   * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
@@ -68,7 +67,7 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li class="{{ (request()->is('/')) ? 'active':'' }}"><a href="/">Home</a></li>
-                    <li class="{{ (request()->is('coba*')) ? 'active':'' }}"><a href="/coba" class="">Events</a></li>
+                    <li class="{{ (request()->is('event*')) ? 'active':'' }}"><a href="{{route('event.front')}}" class="">Events</a></li>
                     <li class="drop-down"><a href="#">My Account</a>
                         <ul>
                             @if (Route::has('login'))
@@ -89,6 +88,7 @@
 
         </div>
     </header><!-- End Header -->
+    
 
     <!-- ======= Hero Section ======= -->
     @yield('body')
@@ -176,7 +176,7 @@
         </div>
     </footer><!-- End Footer -->
 
-    <div id="preloader"></div>
+    {{-- <div id="preloader"></div> --}}
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
     <!-- Vendor JS Files -->
@@ -193,7 +193,10 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('frontend2/js/main.js') }}"></script>
+
     @livewireScripts
+    <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
+        data-turbolinks-eval="false" data-turbo-eval="false"></script>
 </body>
 
 </html>

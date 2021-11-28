@@ -23,9 +23,11 @@ class Event extends Model
     }
     public function scopesearch($query, $term)
     {
-        $term = "%$term%";
-        $query->where(function ($query) use ($term) {
-            $query->Where('title', 'Like', $term);
-        });
+        if (strlen($term) > 2) {
+            $term = "%$term%";
+            $query->where(function ($query) use ($term) {
+                $query->Where('title', 'Like', $term);
+            });
+        }
     }
 }
