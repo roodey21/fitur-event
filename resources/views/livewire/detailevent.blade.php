@@ -1,6 +1,36 @@
 <div>
     {{-- Be like water. --}}
     <section class="breadcrumbs"></section>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <img class="card-img-top" src="{{asset('storage/'.$eventid->foto)}}" alt="Card image cap">
+                <h3>
+                    {{ $eventid->title }}
+                </h3>
+                <span><a href="">Tipe Event</a></span>
+                <hr>
+                <div class="text">
+                    <div class="row">
+                        <div class="col-6">
+                            <h6>Tanggal & Waktu</h6>
+                            <span>
+                                1 Des 2021
+                            </span>
+                        </div>
+                        <div class="col-6">
+                            <h6>
+                                Lokasi
+                            </h6>
+                            <span>
+                                Lokasi online
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="mt-4">
         <div class="d-flex flex-wrap">
             <div class="card" style="width: 15rem;">
