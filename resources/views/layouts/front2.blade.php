@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>BizLand Bootstrap Template - Index</title>
+    <title>Sistem Inkubasi Bisnis | LPPM Universitas Negeri Yogyakarta</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -60,7 +60,7 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo mr-auto"><a href="index.html">BizLand<span>.</span></a></h1>
+            <h1 class="logo mr-auto"><a href="index.html">Siskubis<span>.</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo mr-auto"><img src="frontend2/img/logo.png" alt=""></a>-->
 
@@ -88,7 +88,7 @@
 
         </div>
     </header><!-- End Header -->
-    
+
 
     <!-- ======= Hero Section ======= -->
     @yield('body')

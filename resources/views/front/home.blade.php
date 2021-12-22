@@ -59,7 +59,8 @@
             </div>
 
         </div>
-    </section><!-- End Featured Services Section -->
+    </section>
+    <!-- End Featured Services Section -->
 
     <!-- ======= About Section ======= -->
     <section id="about" class="about section-bg">

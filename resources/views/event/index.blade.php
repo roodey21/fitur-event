@@ -79,6 +79,13 @@
                 </div>
                 <div class="form-group">
                     <label for="publish">Status</label>
+                    <label class="checkbox checkbox-info">
+                        <input type="checkbox" value="2" name="publish" @if (in_array('2', explode(',',
+                            request()->input('filter.publish'))))
+                        checked
+                        @endif
+                        /><span>Finished</span><span class="checkmark"></span>
+                    </label>
                     <label class="checkbox checkbox-primary">
                         <input type="checkbox" value="1" name="publish" @if (in_array('1', explode(',',
                             request()->input('filter.publish'))))
@@ -86,6 +93,7 @@
                         @endif
                         /><span>Published</span><span class="checkmark"></span>
                     </label>
+                    @role('inkubator')
                     <label class="checkbox checkbox-warning">
                         <input type="checkbox" value="0" name="publish" @if (in_array('0', explode(',',
                             request()->input('filter.publish'))))
@@ -93,6 +101,7 @@
                         @endif
                         /><span>Draft</span><span class="checkmark"></span>
                     </label>
+                    @endrole
                 </div>
                 <div class="form-group">
                     <button id="filter" class="btn btn-primary">Filter</button>
@@ -116,12 +125,13 @@
                                     <tr>
                                         <th scope="col">No</th>
                                         <th scope="col">Event Name</th>
-                                        <th scope="col">Priority</th>
                                         <th scope="col">Type</th>
                                         <th scope="col">Tanggal Mulai</th>
                                         <th scope="col">Tanggal Selesai</th>
+                                        @role('inkubator')
                                         <th scope="col">Status</th>
-                                        <th scope="col">Latest Update</th>
+                                        @endrole
+                                        <th scope="col">Update Terakhir</th>
                                         @role('inkubator')
                                         <th scope="col">Action</th>
                                         @endrole
@@ -129,57 +139,64 @@
                                 </thead>
                                 <tbody>
                                     <!-- --------------------------- table row -------------------------------------------->
-                                    @foreach ($event as $key => $item)
+                                    @foreach ($event as $item)
                                     <tr>
-                                        <th class="head-width" scope="row">{{ $event->firstItem() + $key }}</th>
+                                        <th class="head-width" scope="row">{{ $loop->iteration }}</th>
                                         <td class="collection-item">
                                             @role('inkubator')
                                             <div class="font-weight-bold"><a
-                                                    href="/inkubator/event/{{ $item->slug }}">{{ $item->title }}</a>
+                                                    href="/inkubator/event/{{ $item->slug }}">{{ str_limit($item->title, 50)  }}</a>
                                             </div>
                                             @endrole
                                             @role('mentor')
                                             <div class="font-weight-bold"><a
-                                                    href="/mentor/event/{{ $item->slug }}">{{ $item->title }}</a></div>
+                                                    href="/mentor/event/{{ $item->slug }}">{{ str_limit($item->title, 50)  }}</a></div>
                                             @endrole
                                             @role('tenant')
                                             <div class="font-weight-bold"><a
-                                                    href="/tenant/event/{{ $item->slug }}">{{ $item->title }}</a></div>
+                                                    href="/tenant/event/{{ $item->slug }}">{{ str_limit($item->title, 50)  }}</a></div>
                                             @endrole
                                             <div class="text-muted"></div>
                                         </td>
-                                        @role(['mentor', 'inkubator'])
+                                        {{-- @role(['mentor', 'inkubator']) --}}
                                         <td class="custom-align">
                                             <div class="btn-group">
-                                                @if ( $item->priority->id == 1 )
-                                                <button class="btn btn-primary custom-btn btn-sm" type="button"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                @if(!isset($item->priority->id))
+                                                <span class="badge badge-info">
+                                                    semua priority
+                                                </span>
+                                                @elseif ( $item->priority->id == 1 )
+                                                <span class="badge badge-primary">
                                                     {{ $item->priority->name }}
-                                                </button>
+                                                </span>
                                                 @elseif( $item->priority->id == 2 )
-                                                <button class="btn btn-danger custom-btn btn-sm" type="button"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                <span class="badge badge-danger">
                                                     {{ $item->priority->name }}
-                                                </button>
+                                                </span>
                                                 @elseif( $item->priority->id == 3 )
-                                                <button class="btn btn-warning custom-btn btn-sm" type="button"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                <span class="badge badge-warning">
                                                     {{ $item->priority->name }}
-                                                </button>
+                                                </span>
                                                 @elseif( $item->priority->id == 4 )
-                                                <button class="btn btn-warning custom-btn btn-sm" type="button"
-                                                    aria-haspopup="true" aria-expanded="false">
+                                                <span class="badge badge-warning">
                                                     {{ $item->priority->name }}
-                                                </button>
-                                                @else
-                                                <button class="btn btn-info custom-btn btn-sm" type="button"
-                                                    aria-haspopup="true" aria-expanded="false">
-                                                </button>
+                                                </span>
+                                                @endif
+                                            </div>
+                                            <div class="btn-group">
+                                                @if ( $item->type == 'online' )
+                                                <span class="badge badge-primary">
+                                                    Online
+                                                </span>
+                                                @elseif ($item->type == 'offline')
+                                                <span class="badge badge-secondary">
+                                                    Offline
+                                                </span>
                                                 @endif
                                             </div>
                                         </td>
-                                        @endrole
-                                        <td class="custom-align">
+                                        {{-- @endrole --}}
+                                        {{-- <td class="custom-align">
                                             <div class="btn-group">
                                                 @if ( $item->type == 'online' )
                                                 <button class="btn btn-primary custom-btn btn-sm" type="button">
@@ -191,13 +208,13 @@
                                                 </button>
                                                 @endif
                                             </div>
-                                        </td>
+                                        </td> --}}
                                         <td class="custom-align">
                                             <div class="d-inline-flex align-items-center calendar align-middle"><i
-                                                    class="i-Calendar-4"></i><span>{{ $item->start_date->format("d M Y") }}</span>
+                                                    class="i-Calendar-4"></i><span>&nbsp;{{ $item->start_date->format("d M Y") }}</span>
                                             </div><br>
                                             <div class="d-inline-flex align-items-center calendar align-middle"><i
-                                                    class="i-Clock"></i><span>{{ $item->start_time->format("H:i") }}</span>
+                                                    class="i-Clock"></i><span>&nbsp;{{ $item->start_time->format("H:i") }}</span>
                                             </div>
                                         </td>
                                         <td class="custom-align">
@@ -208,28 +225,29 @@
                                                     class="i-Clock"></i><span>{{ $item->end_time->format("H:i") }}</span>
                                             </div>
                                         </td>
+                                        @role('inkubator')
                                         <td class="custom-align">
                                             @if ($item->publish == 2)
-                                            <button class="btn btn-sm btn-primary">Finished</button>
+                                            <button class="btn btn-sm btn-success">Finished</button>
                                             @elseif ($item->publish == 1)
                                             <button class="btn btn-sm btn-primary">Published</button>
                                             @elseif ($item->publish == 0)
-                                            <button class="btn btn-sm btn-primary">Draft</button>
+                                            <button class="btn btn-sm btn-warning">Draft</button>
                                             @endif
                                             {{-- {!! $item->publish == 1 ? '<button class="btn btn-sm btn-primary">Published</button>' : '<button class="btn btn-sm btn-warning">Draft</button>' !!} --}}
                                         </td>
+                                        @endrole
                                         <td class="custom-align">
-                                            <div class="d-inline-flex align-items-center calendar align-middle"><i
-                                                    class="i-Calendar-4"></i><span></span></div>
+                                            <div class="d-inline-flex align-items-center calendar align-middle"><span>{{ $item->updated_at->format("d M Y") }}</span></div>
                                         </td>
                                         @role('inkubator')
                                         <td><a class="ul-link-action text-success"
                                                 href="/inkubator/event/{{ $item->slug }}/edit" data-toggle="tooltip"
-                                                data-placement="top" title="Edit"><i class="i-Edit"></i></a><a
+                                                data-placement="top" title="Edit"><i class="nav-icon i-Pen-2 font-weight-bold"></i></a><a
                                                 class="ul-link-action text-danger mr-1 hapus"
                                                 href="/inkubator/event/{{ $item->slug }}/delete" data-toggle="tooltip"
                                                 data-placement="top" title="Want To Delete !!!"><i
-                                                    class="i-Eraser-2"></i></a>
+                                                    class="nav-icon i-Close-Window font-weight-bold"></i></a>
                                             @endrole
                                     </tr>
                                     @endforeach
@@ -290,7 +308,7 @@
                             <img id="output_image" class="img-fluid">
                         </div>
                         <div class="form-group">
-                            <label for="description">Event</label>
+                            <label for="description">Deskripsi Event</label>
                             <textarea name="description" id="description" required class="form-control"></textarea>
                             @error('description')
                             <div class="mt-2 text-danger">
@@ -346,14 +364,15 @@
                                     @foreach ($priority as $prio)
                                     <option value="{{ $prio->id }}">{{ $prio->name }}</option>
                                     @endforeach
+                                    <option value="0">Semua Priority</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="publish">Publish</label>
                                 <select name="publish" class="form-control" id="publish">
-                                    <option value="2">Finished</option>
-                                    <option value="1">Publish</option>
                                     <option value="0">Draft</option>
+                                    <option value="1">Publish</option>
+                                    <option value="2">Finished</option>
                                 </select>
                             </div>
                         </div>
@@ -437,6 +456,11 @@
         text-align: center;
       }
 
+      th, td {
+          overflow:hidden; white-space:nowrap
+        }
+
+
     </style>
     @endsection
 
@@ -447,7 +471,7 @@
     <script src="{{ asset('theme/js/plugins/toastr.min.js')}}"></script>
     <script src="{{ asset('theme/js/scripts/toastr.script.min.js')}}"></script>
     <script src="{{ asset('theme/js/plugins/sweetalert2.min.js')}}"></script>
-    <script src="{{ asset('theme/js/scripts/sweetalert2.script.min.js')}}"></script>
+    <script src="{{ asset('theme/js/scripts/sweetalert.script.min.js')}}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 

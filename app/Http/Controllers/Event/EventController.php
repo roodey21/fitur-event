@@ -142,6 +142,11 @@ class EventController extends Controller
         $attr['author_id'] = Auth::user()->id;
         $attr['inkubator_id'] = Auth::user()->inkubator_id;
 
+        // dd($attr);
+        if($attr['priority_id']==0){
+            $attr['priority_id']=null;
+        }
+
         $foto = request()->file('foto');
         $fotoUrl = $foto->storeAs("image/event", "{$slug}.{$foto->extension()}");
         $attr['foto'] = $fotoUrl;

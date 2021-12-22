@@ -6,17 +6,17 @@
 </div>
 @endsection
 @section('content')
-<div class="card">
+{{-- <div class="card">
 	<div class="card-body">
 		<ul>
 			opsi konten :
 			<li>
 				tampilin daftar event yg diikutin
-			</li> 
+			</li>
 			<li>
 				tampilin daftar event yg akan datang
-			</li> 
+			</li>
 		</ul>
 	</div>
-</div>
+</div> --}}
 @endsection

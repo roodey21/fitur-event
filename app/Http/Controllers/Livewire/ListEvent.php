@@ -25,7 +25,7 @@ class ListEvent extends Component
             $query->whereYear('start_date', date('Y'))->whereMonth('start_date', date('m'));
         })->when($this->waktu == "nextmonth", function ($query) {
             $query->whereYear('start_date', date('Y'))->whereMonth('start_date', strtotime(today() . "+1 Month"));
-        })->orderBy('start_date', 'desc')->orderByDesc('start_time')->where('publish', 1)->take($this->get)->get();
+        })->orderBy('start_date', 'desc')->orderByDesc('start_time')->where('publish', '1')->take($this->get)->get();
         $this->totalRecord = count($model);
         return $model;
     }
@@ -37,7 +37,7 @@ class ListEvent extends Component
     {
         $searchResult = [];
         if (strlen($this->search) > 2) {
-            $searchResult = Event::Where('title', 'Like', "%$this->search%")->where('publish', 1)->get();
+            $searchResult = Event::Where('title', 'Like', "%$this->search%")->where('publish', '1')->get();
         }
         return view('livewire.list-event', [
             'category' => Priority::all(),

@@ -14,9 +14,9 @@
         <a class="btn btn-primary text-white btn-rounded" href="#" target="_blank">Contact Us</a>
         <span class="flex-grow-1"></span>
         <div class="d-flex align-items-center">
-            <img class="logo" src="images/logo.png" alt="">
+            <img class="logo" src="/theme/images/siskubis.png" alt="">
             <div>
-                <p class="m-0">&copy; 2020 SISKUBIS</p>
+                <p class="m-0">&copy; {{ now()->year }} SISKUBIS</p>
                 <p class="m-0">All rights reserved</p>
             </div>
         </div>
