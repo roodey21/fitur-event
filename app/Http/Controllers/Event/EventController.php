@@ -206,7 +206,9 @@ class EventController extends Controller
             'message' => 'Event Berhasil Diperbarui',
             'alert-type' => 'success'
         );
-        return redirect()->to('/inkubator/event')->with($notification);
+        session()->flash('message','Event Berhasil Diperbarui');
+        session()->flash('alert-type','success');
+        return redirect()->to('/inkubator/event');
     }
 
     public function destroy(Event $event)

@@ -92,6 +92,7 @@
 
     <!-- ======= Hero Section ======= -->
     @yield('body')
+    @yield('content')
     <!-- ======= Footer ======= -->
     <footer id="footer">
 

@@ -4,6 +4,7 @@
 <div class="breadcrumb">
 	<h1 class="mr-2">Dashboard Tenant</h1>
 </div>
+<div class="row" style="height: 60vh"></div>
 @endsection
 @section('content')
 {{-- <div class="card">

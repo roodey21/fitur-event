@@ -7,7 +7,7 @@
 @endsection
 @section('content')
 <div class="separator-breadcrumb border-top"></div>
-<div class="row">
+<div class="row" style="height: 60vh">
 	<div class="col-lg-12 col-md-12">
 		<!-- CARD ICON-->
 		<div class="row">

@@ -98,7 +98,7 @@
                                     <a href="{{route('event.details', $itemevent->id)}}" class="card-title"
                                         target="_blank" rel="noreferrer noopener">{{($itemevent->title)}}</a>
                                     {{-- <p class="card-text">{!!$itemevent->description!!}</p> --}}
-                                    <p class="card-text">{{$itemevent->priority->name}}</p>
+                                    <p class="card-text">{{$itemevent->priority->name ?? 'ALL' }}</p>
                                     <small class="text-muted">{{$itemevent->start_date->diffForHumans()}}</small>
                                 </div>
                             </div>

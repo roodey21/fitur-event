@@ -12,7 +12,7 @@
 				</h1>
 				{{-- <small>{{ $berita->profil_user->nama }} - <b>SISKUBIS</b></small> --}}
 				<figure>
-				<img src="{{ asset("storage/" . $event->foto) }}" alt="{{ $event->slug }}" class="rounded mx-auto d-block" height="400px">
+				    <img src="{{ asset("storage/" . $event->foto) }}" alt="{{ $event->slug }}" class="rounded mx-auto d-block" height="400px">
 				</figure>
                 <hr>
 				<p class="text-justify">{!! $event->description !!}</p>
@@ -34,7 +34,7 @@
                     <dt>Lokasi event</dt>
                     <dd>{{ $event->location }}</dd>
                     <dt>Priority event</dt>
-                    <dt><span class="badge {{ $event->priority_id == 1 ? 'badge-success':'' }}{{ $event->priority_id == 2 ? 'badge-primary':'' }}{{ $event->priority_id == 3 ? 'badge-warning':'' }}{{ $event->priority_id == 4 ? 'badge-danger':'' }}">{{ $event->priority->name }}</span></dt>
+                    <dt><span class="badge {{ $event->priority_id == null ? 'badge-secondary':'' }}{{ $event->priority_id == 1 ? 'badge-success':'' }}{{ $event->priority_id == 2 ? 'badge-primary':'' }}{{ $event->priority_id == 3 ? 'badge-warning':'' }}{{ $event->priority_id == 4 ? 'badge-danger':'' }}">{{ $event->priority->name ?? 'ALL' }}</span></dt>
                   </dl>
             </div>
         </div>
