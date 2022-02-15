@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Livewire;
 
 
-use App\Event;
-use App\Priority;
-use Livewire\Component;
-use Livewire\WithPagination;
-use Illuminate\Support\Str;
+use App\{Event,Priority};
+use Livewire\{Component,WithPagination};
 class ListEvent extends Component
 {
     public $filter, $status, $search, $waktu, $totalRecord,$cek,$slug;
