@@ -295,12 +295,12 @@ $('#calendar').fullCalendar({
 	}
 
 	if(event.url == null){
-		$('#tgl_mulai').val(event.start.format());
+		$('#start_date').val(event.start.format());
 		
 		if(event.end == null){
-			$('#tgl_selesai').val(event.start.format());
+			$('#end_date').val(event.start.format());
 		} else {
-			$('#tgl_selesai').val(event.end.subtract(1, "days").format());
+			$('#end_date').val(event.end.subtract(1, "days").format());
 		}
 		$('#priority_id').val(priority_id);
 		$('#inputModal').modal('show');
