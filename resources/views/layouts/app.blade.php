@@ -10,7 +10,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700,800,900" rel="stylesheet" />
 	<link href="{{ asset('theme/css/themes/lite-purple.css')}}" rel="stylesheet" />
 	<link href="{{ asset('theme/css/plugins/perfect-scrollbar.css')}}" rel="stylesheet" />
-	<link href="{{ asset('theme/css/plugins/fontawesome-5.css')}}" rel="stylesheet" />
+	<link rel="stylesheet" href="{{ asset('theme/css/plugins/fontawesome-5.css')}}" />
     <link href="{{ asset('theme/css/plugins/metisMenu.min.css')}}" rel="stylesheet" />
 	@yield('css')
 	{{-- @livewireStyles --}}
@@ -66,6 +66,7 @@
 				<!-- fotter end -->
 			</div>
 		</div>
+	</div>
 		<script src="{{ asset('theme/js/plugins/jquery-3.3.1.min.js')}}"></script>
 		<script src="{{ asset('theme/js/plugins/bootstrap.bundle.min.js')}}"></script>
 		<script src="{{ asset('theme/js/plugins/perfect-scrollbar.min.js')}}"></script>
@@ -76,6 +77,7 @@
 		<script src="{{ asset('theme/js/plugins/feather.min.js')}}"></script>
 		<script src="{{ asset('theme/js/plugins/metisMenu.min.js')}}"></script>
         <script src="{{ asset('theme/js/scripts/layout-sidebar-vertical.min.js')}}"></script>
+        <script src="{{ asset('theme/js/dropzone.js')}}"></script>
 		@yield('js')
 
 		<script>
@@ -87,7 +89,6 @@
 			});
 		</script>
 		{{-- @livewireScripts --}}
-		
 </body>
 
 </html>

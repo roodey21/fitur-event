@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\Inkubator;
 
-use Auth;
-use File;
-use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Inkubator;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
+    
     public function __construct()
     {
         $this->middleware('auth');
@@ -38,7 +39,7 @@ class ProfileController extends Controller
         $fileName = $inkubator->photo;
 
         if ($request->has('photo')) {
-            \File::delete('img/profile/inkubator/' . $inkubator->photo);
+            storage::delete('img/profile/inkubator/' . $inkubator->photo);
             $file = $request->file('photo');
             $fileName = time() . '_' . $file->getClientOriginalName();
 

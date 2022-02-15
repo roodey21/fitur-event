@@ -27,8 +27,8 @@
     <link href="{{ asset('frontend2/vendor/aos/aos.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset('frontend2/css/style.css') }}" rel="stylesheet">
-    <script src="{{asset('js/app.js')}}" defer></script>
-    @livewireStyles
+    {{-- @livewireStyles --}}
+    {{-- <script src="{{asset('js/app.js')}}" defer></script> --}}
     <!-- =======================================================
   * Template Name: BizLand - v1.2.1
   * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
@@ -67,17 +67,18 @@
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li class="{{ (request()->is('/')) ? 'active':'' }}"><a href="/">Home</a></li>
-                    <li class="{{ (request()->is('event*')) ? 'active':'' }}"><a href="{{route('event.front')}}" class="">Events</a></li>
+                    <li class="{{ (request()->is('event*')) ? 'active':'' }}"><a data href="{{route('event.front')}}" class="">Events</a></li>
                     <li class="drop-down"><a href="#">My Account</a>
                         <ul>
                             @if (Route::has('login'))
                             @auth
                             <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                            <li><a href="" onclick="event.preventDefault();$('#form-logout').submit();">Logout</a></li>
+                            <li>
+                                <a href="" onclick="event.preventDefault();$('#form-logout').submit();">Logout</a></li>
                             <form action="{{ route('logout') }}" id="form-logout" method="POST">@csrf</form>
                             @else
                             <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
                             @endauth
                             @endif
                         </ul>
@@ -92,7 +93,6 @@
 
     <!-- ======= Hero Section ======= -->
     @yield('body')
-    @yield('content')
     <!-- ======= Footer ======= -->
     <footer id="footer">
 
@@ -162,7 +162,6 @@
                 </div>
             </div>
         </div>
-
         <div class="container py-4">
             <div class="copyright">
                 &copy; Copyright <strong><span>BizLand</span></strong>. All Rights Reserved
@@ -181,23 +180,23 @@
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
 
     <!-- Vendor JS Files -->
-    <script src="{{ asset('frontend2/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/php-email-form/validate.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/counterup/counterup.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/venobox/venobox.min.js') }}"></script>
-    <script src="{{ asset('frontend2/vendor/aos/aos.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/jquery/jquery.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/jquery.easing/jquery.easing.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/php-email-form/validate.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/waypoints/jquery.waypoints.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/counterup/counterup.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/owl.carousel/owl.carousel.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/venobox/venobox.min.js') }}"></script>
+    <script defer src="{{ asset('frontend2/vendor/aos/aos.js') }}"></script>
 
     <!-- Template Main JS File -->
-    <script src="{{ asset('frontend2/js/main.js') }}"></script>
+    <script defer src="{{ asset('frontend2/js/main.js') }}"></script>
 
-    @livewireScripts
-    <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
-        data-turbolinks-eval="false" data-turbo-eval="false"></script>
+    {{-- @livewireScripts --}}
+    {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
+        data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
 </body>
 
 </html>

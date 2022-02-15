@@ -1,6 +1,6 @@
 <?php
 
-use Livewire\{ListEvent, Home, Detailevent};
+use Livewire\{ListEvent, Home};
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -17,21 +17,14 @@ use Illuminate\Support\Facades\Auth;
 // Route website frontend
 Route::get('/', Home::class); // halaman home
 Route::get('/event-uny', ListEvent::class)->name('event.front'); // halaman event
-Route::get('/event-uny/detail/{id}', Detailevent::class)->name('event.details');
-// Route::get('/event', 'FrontController@event');
-Route::view('/modal', 'layouts.new');
+// Route::get('/event-uny/detail/{id}', Detailevent::class)->name('event.details');
+Route::get('/event-uny/{event:slug}','frontendController@find')->name('event.details');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::get('/front', function () {
-    return view('layouts.front');
-})->name('front.home');
-Route::get('/event', function () {
-    return view('front.event');
-})->name('front.event');
-// Route::get('/front2', function () {
-//     return view('layouts.front2');
-// })->name('front2.home');
+Route::view('/cek','front.home');
+// Route::view('/cek2','front.listEvent');
+Route::view('/cek3','front.detail');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], function () {
     Route::get('/', 'Inkubator\HomeController@index')->name('inkubator.home');
     Route::get('/profile', 'Inkubator\ProfileController@index')->name('inkubator.profile');
