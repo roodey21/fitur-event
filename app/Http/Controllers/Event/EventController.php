@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Event;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 use App\{Event, Priority, Tenant};
 use Illuminate\Http\Request;
 use App\Http\Requests\EventRequest;
@@ -97,7 +99,7 @@ class EventController extends Controller
         $event = Event::where([
             ['inkubator_id', '=', Auth::user()->inkubator_id],
             ['priority_id', '=', $tenant->priority_id],
-            ['publish', '=', '1']
+            ['publish', '=', 1]
         ])->latest()->paginate();
 
         return view('/event/index', compact('event'));
@@ -135,9 +137,40 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        $attr = $request->all();
+        //code Hanafi and i mean is gorgoes
+        // $attr = $request->all();
+        // $waitslug = Str::slug(request('title'));
+        // $cek = Event::where('slug',$waitslug)->first();
+        // if ($waitslug == $cek->slug) {
+        //     # code...
+        //     $useSlug = Str::slug($this->slug.' '.Str::random(4));
+        // }else{
+        //     $useSlug = $waitslug;
+        // }
+        // $attr['slug'] = $useSlug;
+        // $attr['author_id'] = Auth::user()->id;
+        // $attr['inkubator_id'] = Auth::user()->inkubator_id;
 
-        $slug = \Str::slug(request('title'));
+        // if($attr['priority_id']==0){
+        //     $attr['priority_id']=null;
+        // }
+
+        // $foto = request()->file('foto');
+        // $fotoUrl = $foto->storeAs("image/event", "{$useSlug}.{$foto->extension()}");
+        // $attr['foto'] = $fotoUrl;
+
+        // Event::create($attr);
+
+        // $notification = array(
+        //     'message' => 'Event Baru Berhasil Ditambah',
+        //     'alert-type' => 'success'
+        // );
+
+        // return redirect()->to('/inkubator/event')->with($notification);
+        // -------------end line--------------
+        
+        $attr = $request->all();
+        $slug = Str::slug(request('title'));
         $attr['slug'] = $slug;
         $attr['author_id'] = Auth::user()->id;
         $attr['inkubator_id'] = Auth::user()->inkubator_id;
@@ -193,7 +226,7 @@ class EventController extends Controller
         $photo = $request->file('foto');
 
         if ($request->file('foto')) {
-            \Storage::delete($event->foto);
+            Storage::delete($event->foto);
             $foto = request()->file('foto');
             $fotoUrl = $foto->storeAs("image/event", "{$event->slug}.{$foto->extension()}");
             $attr['foto'] = $fotoUrl;
@@ -206,14 +239,12 @@ class EventController extends Controller
             'message' => 'Event Berhasil Diperbarui',
             'alert-type' => 'success'
         );
-        session()->flash('message','Event Berhasil Diperbarui');
-        session()->flash('alert-type','success');
-        return redirect()->to('/inkubator/event');
+        return redirect()->to('/inkubator/event')->with($notification);
     }
 
     public function destroy(Event $event)
     {
-        \Storage::delete($event->foto);
+        Storage::delete($event->foto);
         $event->delete();
         $notification = array(
             'message' => 'Event telah Dihapus',

@@ -7,14 +7,19 @@
                 <div class="sidebar-compact-switch ml-auto"><span></span></div>
             </div>
             <!--  user -->
-            <div class="scroll-nav ps ps--active-y" data-perfect-scrollbar="data-perfect-scrollbar" data-suppress-scroll-x="true">
+            <div class="scroll-nav ps ps--active-y" data-perfect-scrollbar="data-perfect-scrollbar"
+                data-suppress-scroll-x="true">
                 <div class="side-nav">
                     <div class="main-menu">
                         <ul class="metismenu" id="menu">
-                            <li class="Ul_li--hover"><a class="" href="{{ route('inkubator.home') }}"><i class="i-Bar-Chart text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Dashboard</span></a>
+                            <li class="Ul_li--hover"><a class="" href="{{ route('inkubator.home') }}"><i
+                                        class="i-Bar-Chart text-20 mr-2 text-muted"></i><span
+                                        class="item-name text-15 text-muted">Dashboard</span></a>
 
                             </li>
-							<li class="Ul_li--hover"><a href="{{route('inkubator.event-list')}}"><i class="i-File-Horizontal-Text text-20 mr-2 text-muted"></i><span class="item-name text-15 text-muted">Event</span></a></li>
+                            <li class="Ul_li--hover"><a href="{{route('inkubator.event-list')}}"><i
+                                        class="i-File-Horizontal-Text text-20 mr-2 text-muted"></i><span
+                                        class="item-name text-15 text-muted">Event</span></a></li>
                         </ul>
                     </div>
                 </div>

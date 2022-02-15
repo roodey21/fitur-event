@@ -31,7 +31,7 @@
                                 <label for="">Waktu Event</label>
                                 <select class="form-control" wire:model="waktu" id="">
                                     <option value="">All event</option>
-                                    <option value="today">Hari ini</option>
+                                    <option value="today" class="active">Hari ini</option>
                                     <option value="tomorrow">besok</option>
                                     <option value="today">akhir pekan</option>
                                     <option value="today">minggu ini</option>
@@ -98,7 +98,7 @@
                                     <a href="{{route('event.details', $itemevent->id)}}" class="card-title"
                                         target="_blank" rel="noreferrer noopener">{{($itemevent->title)}}</a>
                                     {{-- <p class="card-text">{!!$itemevent->description!!}</p> --}}
-                                    <p class="card-text">{{$itemevent->priority->name ?? 'ALL' }}</p>
+                                    <p class="card-text">{{$itemevent->priority->name}}</p>
                                     <small class="text-muted">{{$itemevent->start_date->diffForHumans()}}</small>
                                 </div>
                             </div>

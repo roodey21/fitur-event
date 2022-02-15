@@ -119,7 +119,7 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered custom-sm-width table-striped" id="table"
+                            <table class="table table-bordered custom-sm-width table-striped" id="names"
                                 style="width: 100%">
                                 <thead>
                                     <tr>
@@ -394,7 +394,7 @@
     <link rel="stylesheet" href="{{ asset('theme/css/plugins/datatables.min.css')}}" />
     <link href="{{ asset('theme/css/plugins/toastr.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('theme/css/plugins/sweetalert2.min.css')}}" />
-    <link rel="stylesheet" href="{{ asset('theme/js/plugins/daterangepicker/daterangepicker.css')}}" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     <style>
         #wrapper {
             text-align: center;
@@ -467,13 +467,13 @@
     @section('js')
     <script src="{{ asset('theme/js/plugins/datatables.min.js')}}"></script>
     <script src="{{ asset('theme/js/scripts/datatables.script.min.js')}}"></script>
-    <script src="{{ asset('theme/js/plugins/ckeditor/ckeditor.js')}}"></script>
-    <script src="{{ asset('theme/js/plugins/daterangepicker/moment.min.js')}}"></script>
-    <script src="{{ asset('theme/js/plugins/daterangepicker/daterangepicker.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script src="{{ asset('theme/js/plugins/toastr.min.js')}}"></script>
     <script src="{{ asset('theme/js/scripts/toastr.script.min.js')}}"></script>
     <script src="{{ asset('theme/js/plugins/sweetalert2.min.js')}}"></script>
     <script src="{{ asset('theme/js/scripts/sweetalert.script.min.js')}}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script>
         $(function () {
@@ -483,7 +483,7 @@
 
         $('#inputModal').appendTo("body")
 
-        $('#table').DataTable(
+        $('#names').DataTable(
             {
                 "pagingType": "numbers",
                 @role('tenant')
@@ -492,10 +492,7 @@
                 @role(['mentor', 'inkubator'])
                 "searching": false,
                 @endrole
-                "scrollX": true,
-                "language": {
-                    "emptyTable": "No Event available "
-                 }
+                "scrollX": true
             }
         );
 
