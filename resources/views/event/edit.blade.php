@@ -7,13 +7,13 @@
             @method('patch')
             @csrf
           <div class="form-group">
-              <div class="col d-flex justify-content-center">
+              <div class="col">
                 {{-- <div class="drop-zone">
                   <span class="drop-zone__prompt"><img src="{{asset("storage/". $event->foto)}}"></span>
                   <input type="file" name="foto" id="exampleInputFile" for="exampleInputFile"
                       class="drop-zone__input">
                 </div> --}}
-                <div class="drop-zone" >
+                <div class="drop-zone mx-auto">
                     <span class="drop-zone__prompt" ><img src="{{asset("storage/". $event->foto)}}"></span>
                     <input type="file" name="foto" id="exampleInputFile" for="exampleInputFile" class="drop-zone__input" value="{{$event->foto}}">
                 </div>
