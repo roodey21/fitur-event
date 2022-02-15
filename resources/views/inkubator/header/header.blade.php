@@ -13,7 +13,7 @@
 			<div class="dropdown dropleft"><i class="i-Safe-Box text-muted header-icon" id="dropdownMenuButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
 				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<div class="menu-icon-grid">
-					<a href="{{route('inkubator.profile')}}"><i class="i-Checked-User"></i> Profile</a>
+					<a href="#"><i class="i-Checked-User"></i> Profile</a>
 					<a href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();"><i class="i-Power-2"></i> Logout</a> </div>

@@ -97,7 +97,7 @@ class EventController extends Controller
         $event = Event::where([
             ['inkubator_id', '=', Auth::user()->inkubator_id],
             ['priority_id', '=', $tenant->priority_id],
-            ['publish', '=', 1]
+            ['publish', '=', '1']
         ])->latest()->paginate();
 
         return view('/event/index', compact('event'));
