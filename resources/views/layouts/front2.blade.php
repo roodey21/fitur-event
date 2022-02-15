@@ -10,8 +10,7 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('frontend2/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('frontend2/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link  rel="shortcut icon" href="http://siskubisdemo.com/theme/images/logo.png" type="image/png" />
 
     <!-- Google Fonts -->
     <link
@@ -27,14 +26,20 @@
     <link href="{{ asset('frontend2/vendor/aos/aos.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset('frontend2/css/style.css') }}" rel="stylesheet">
-    {{-- @livewireStyles --}}
-    {{-- <script src="{{asset('js/app.js')}}" defer></script> --}}
-    <!-- =======================================================
-  * Template Name: BizLand - v1.2.1
-  * Template URL: https://bootstrapmade.com/bizland-bootstrap-business-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    <!-- CSS Libraries -->
+    {{-- <link rel="stylesheet" href="https://getstisla.com/dist/modules/chocolat/dist/css/chocolat.css"> --}}
+
+    <!-- Template CSS -->
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/components.css')}}">
+    @livewireStyles
+    <script src="{{asset('js/app.js')}}" defer></script>
 </head>
 
 <body>
@@ -60,29 +65,32 @@
     <header id="header" class="fixed-top">
         <div class="container d-flex align-items-center">
 
-            <h1 class="logo mr-auto"><a href="index.html">Siskubis<span>.</span></a></h1>
+            <h1 class="logo mr-auto"> <img src="http://siskubisdemo.com/theme/images/logo.png" alt="" srcset=""><a class="ml-2" href="/">Siskubis<span>.</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo mr-auto"><img src="frontend2/img/logo.png" alt=""></a>-->
 
             <nav class="nav-menu d-none d-lg-block">
                 <ul>
                     <li class="{{ (request()->is('/')) ? 'active':'' }}"><a href="/">Home</a></li>
-                    <li class="{{ (request()->is('event*')) ? 'active':'' }}"><a data href="{{route('event.front')}}" class="">Events</a></li>
+                    <li class="{{ (request()->is('event*')) ? 'active':'' }}"><a data href="{{route('event.front')}}"
+                            class="">Events</a></li>
                     <li class="drop-down"><a href="#">My Account</a>
                         <ul>
                             @if (Route::has('login'))
                             @auth
-                            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                            <li><a href="{{ route('dashboard') }}" data-turbolinks="false">Dashboard</a></li>
                             <li>
-                                <a href="" onclick="event.preventDefault();$('#form-logout').submit();">Logout</a></li>
+                                <a href="" data-turbolinks="false"
+                                    onclick="event.preventDefault();$('#form-logout').submit();">Logout</a></li>
                             <form action="{{ route('logout') }}" id="form-logout" method="POST">@csrf</form>
                             @else
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            {{-- <li><a href="{{ route('register') }}">Register</a></li> --}}
-                            @endauth
-                            @endif
-                        </ul>
-                    </li>
+                            <li><a href="{{ route('login') }}" data-turbolinks="false">Login</a></li>
+                            {{-- <li><a href="{{ route('register') }}">Register</a>
+                    </li> --}}
+                    @endauth
+                    @endif
+                </ul>
+                </li>
 
                 </ul>
             </nav><!-- .nav-menu -->
@@ -93,6 +101,7 @@
 
     <!-- ======= Hero Section ======= -->
     @yield('body')
+
     <!-- ======= Footer ======= -->
     <footer id="footer">
 
@@ -115,7 +124,7 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-6 footer-contact">
-                        <h3>LPPM - UNY<span>.</span></h3>
+                        <h3>SISKUBIS - UNY<span>.</span></h3>
                         <p>
                             Karang Malang, Yogyakarta, <br>
                             Indonesia<br>
@@ -167,11 +176,8 @@
                 &copy; Copyright <strong><span>BizLand</span></strong>. All Rights Reserved
             </div>
             <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/bizland-bootstrap-business-template/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+
+                Designed by <a href="#">Tugas Akhir</a>
             </div>
         </div>
     </footer><!-- End Footer -->
@@ -190,13 +196,23 @@
     <script defer src="{{ asset('frontend2/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script defer src="{{ asset('frontend2/vendor/venobox/venobox.min.js') }}"></script>
     <script defer src="{{ asset('frontend2/vendor/aos/aos.js') }}"></script>
-
+    {{-- 
+     <script defer src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script> --}}
     <!-- Template Main JS File -->
     <script defer src="{{ asset('frontend2/js/main.js') }}"></script>
-
-    {{-- @livewireScripts --}}
-    {{-- <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
-        data-turbolinks-eval="false" data-turbo-eval="false"></script> --}}
+    <script defer src="{{asset('assets/js/scripts.js')}}"></script>
+    @livewireScripts
+    <script src="https://cdn.jsdelivr.net/gh/livewire/turbolinks@v0.1.x/dist/livewire-turbolinks.js"
+        data-turbolinks-eval="false" data-turbo-eval="false"></script>
 </body>
 
 </html>

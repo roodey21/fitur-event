@@ -1,7 +1,7 @@
 <div>
-    <div class="main-content">
-        <section class="section">
-            <div class="container">
+    {{-- <div class="main-content"> --}}
+        <section class="section mt-5">
+            <div class="container mt-5">
                 <div class="section-header">
                     <h1>Event Siskubis</h1>
                     <div class="section-header-breadcrumb">
@@ -21,7 +21,7 @@
                                 <div class="card shadow-sm rounded">
                                     <div class="card-body">
                                         <div class="d-flex justify-content-between">
-                                            <h4 style="font-size: 16px" class="text-dark">Topik</h4>
+                                            <h4 style="font-size: 16px" class="text-dark">Priority</h4>
                                             <div class="card-header-action">
                                                 <a data-collapse="#mycard-collapse1" class="btn"><i
                                                         class="fas fa-minus"></i></a>
@@ -35,6 +35,9 @@
                                         <p class="card-text">
                                             @isset($filter)
                                             @switch($filter)
+                                            @case(0)
+                                            Semua Priority
+                                            @break
                                             @case(1)
                                             Proposal
                                             @break
@@ -47,9 +50,6 @@
                                             @case(4)
                                             Scale Up
                                             @break
-                                            @case('all')
-                                            Semua Kategori
-                                            @break
                                             @default
                                             @endswitch
                                             @endisset
@@ -61,7 +61,7 @@
                                               <label class="">
                                                     <input type="radio" wire:model.debounce.100ms="filter" value="all"
                                                         class="selectgroup-input">
-                                                    <span class="selectgroup-button">Semua topik</span>
+                                                    <span class="selectgroup-button">Semua Priority</span>
                                                 </label>
                                                 @foreach ($category as $item)
 
@@ -255,7 +255,7 @@
                                             <div class="mb-2 text-muted">{{ date('j M',strtotime($item->start_date)) }}
                                                 -
                                                 {{date('j M Y',strtotime($item->start_date))}}</div>
-                                            <div class="mb-2 text-warning font-weight-bold">{{$item->priority->name}}
+                                            <div class="mb-2 text-warning font-weight-bold">{{$item->priority->name ?? 'Semua Priority'}}
                                             </div>
                                         </div>
                                         <hr>
@@ -312,5 +312,5 @@
                 </div>
             </div>
         </section>
-    </div>
+    {{-- </div> --}}
 </div>

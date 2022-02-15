@@ -17,12 +17,9 @@ use Illuminate\Support\Facades\Auth;
 // Route website frontend
 Route::get('/', Home::class); // halaman home
 Route::get('/event-uny', ListEvent::class)->name('event.front'); // halaman event
-// Route::get('/event-uny/detail/{id}', Detailevent::class)->name('event.details');
+
 Route::get('/event-uny/{event:slug}','frontendController@find')->name('event.details');
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
-Route::view('/cek','front.home');
-// Route::view('/cek2','front.listEvent');
-Route::view('/cek3','front.detail');
 
 Auth::routes(['register' => false]);
 Route::group(['prefix' => 'inkubator', 'middleware' => ['role:inkubator']], function () {

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>{{$title ?? 'Detail Event | LPPM Universitas Negeri Yogyakarta'}}</title>
+    <title>{{$title ?? 'Detail Event | Siskubis Universitas Negeri Yogyakarta'}}</title>
 
 
     <!-- General CSS Files -->
@@ -54,7 +54,7 @@
                                     <div class="d-flex">
                                         <div class="mb-2 text-muted">Kategori :</div>
                                         &nbsp;
-                                        <div class="mb-2 text-warning font-weight-bold">{{$data->priority->name}}</div>
+                                        <div class="mb-2 text-warning font-weight-bold">{{$data->priority->name ?? ''}}</div>
                                     </div>
                                 </div>
                                 <hr>
@@ -147,7 +147,7 @@
                                             <div class="mb-2 text-muted">{{ date('j M',strtotime($berkaiten->start_date)) }}
                                                 -
                                                 {{date('j M Y',strtotime($berkaiten->start_date))}}</div>
-                                            <div class="mb-2 text-warning font-weight-bold">{{$berkaiten->priority->name}}
+                                            <div class="mb-2 text-warning font-weight-bold">{{$berkaiten->priority->name ?? ''}}
                                             </div>
                                         </div>
                                         <hr>
@@ -189,7 +189,7 @@
                                             <div class="mb-2 text-muted">{{ date('j M',strtotime($item->start_date)) }}
                                                 -
                                                 {{date('j M Y',strtotime($item->start_date))}}</div>
-                                            <div class="mb-2 text-warning font-weight-bold">{{$item->priority->name}}
+                                            <div class="mb-2 text-warning font-weight-bold">{{$item->priority->name ?? ''}}
                                             </div>
                                         </div>
                                         <hr>

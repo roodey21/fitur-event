@@ -12,7 +12,7 @@ class ListEvent extends Component
 {
     public $filter, $status, $search, $waktu, $totalRecord,$cek,$slug;
     protected $queryString = ['filter', 'status', 'search', 'waktu'];
-    public $get = 4;
+    public $get = 8;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
@@ -21,8 +21,11 @@ class ListEvent extends Component
     {
         
         $model = Event::with('priority')
-            ->when($this->filter && $this->filter !='all', function ($query) {
+            ->when($this->filter && $this->filter != 'all', function ($query) {
                 $query->where('priority_id', $this->filter);
+            })
+            ->when($this->filter == 'all', function ($query) {
+                $query->where('priority_id', 0);
             })
             ->when($this->status && $this->status !='all', function ($query) {
                 $query->where('type', $this->status);
@@ -94,30 +97,11 @@ class ListEvent extends Component
     public function resetSearch(){
         $this->reset('search');
     }
-    // public function slug(){
-    //     // dd(Str::slug($this->slug.' '.Str::random(4)));
-
-    //     $slug = Str::slug($this->slug);
-    //     $cek = Event::where('slug',$slug)->first();
-    //     if ($slug == $cek->slug) {
-    //         # code...
-    //         $useSlug = Str::slug($this->slug.' '.Str::random(4));
-    //     }else{
-    //         $useSlug = $slug;
-    //     }
-        
-    // }
     public function render()
     {
-        // $searchResult = [];
-        // if (strlen($this->search) > 2) {
-        //     $searchResult = Event::Where('title', 'Like', "%$this->search%")->where('publish', '1')->get();
-        // }
         return view('livewire.listEvent', [
             'category' => Priority::all(),
             'event' => $this->data(),
-            // 'searchResult' => $searchResult
-        ])->extends('layouts.home')
-            ->section('body');
+        ])->extends('layouts.front2')->section('body');
     }
 }
