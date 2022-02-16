@@ -138,16 +138,16 @@ class EventController extends Controller
     public function store(EventRequest $request)
     {
         $attr = $request->all();
-        
+
         $slug = \Str::slug(request('title'));
         $attr['slug'] = $slug;
         $attr['author_id'] = Auth::user()->id;
         $attr['inkubator_id'] = Auth::user()->inkubator_id;
 
         // dd($attr);
-        if($attr['priority_id']==0){
-            $attr['priority_id']=null;
-        }
+        // if($attr['priority_id']==0){
+        //     $attr['priority_id']=null;
+        // }
 
         $foto = request()->file('foto');
         $fotoUrl = $foto->storeAs("image/event", "{$slug}.{$foto->extension()}");
@@ -162,8 +162,8 @@ class EventController extends Controller
         $refs = request()->headers->get('referer');
         if($refs == $request->getSchemeAndHttpHost().'/inkubator/event'){
             return redirect()->to('/inkubator/event')->with($notification);
-        } elseif ($refs == $request->getSchemeAndHttpHost().'/inkubator/calendar') {
-            return redirect()->to('/inkubator/calendar')->with($notification);
+        } elseif ($refs == $request->getSchemeAndHttpHost().'/inkubator/event/calendar') {
+            return redirect()->to('/inkubator/event/calendar')->with($notification);
         }
     }
     public function edit(Event $event)
@@ -175,7 +175,6 @@ class EventController extends Controller
     public function update(EventRequest $request, Event $event)
     {
         $attr = $request->all();
-        $photo = $request->file('foto');
 
         if ($request->file('foto')) {
             Storage::delete($event->foto);

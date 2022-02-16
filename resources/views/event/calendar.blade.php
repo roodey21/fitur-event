@@ -25,7 +25,7 @@
 			<div class="card-body">
 				<div class="create_event_wrap">
 					<ul class="list-group" id="external-events">
-            <li class="list-group-item bg-secondary fc-event">
+                        <li class="list-group-item bg-secondary fc-event">
 							ALL
 						</li>
 						<li class="list-group-item bg-primary fc-event">
@@ -42,7 +42,7 @@
 						</li>
 					</ul>
 					<p>
-            Seret Kategori diatas ke tanggal yang diinginkan untuk menambakan event baru
+                        Seret Kategori diatas ke tanggal yang diinginkan untuk menambakan event baru
 					</p>
 				</div>
 			</div>
@@ -51,7 +51,7 @@
 	</div>
 	<div class="col-md-9">
 		<div class="response"></div>
-		<div class="card mb-4 o-hidden">
+		<div class="card o-hidden">
 			<div class="card-body">
 				<div id="calendar"></div>
 			</div>
@@ -145,7 +145,6 @@
                         <div class="form-group col-md-6">
                             <label for="priority">Priority</label>
                             <select class="form-control" name="priority_id" id="priority_id">
-                              <option value="0">ALL</option>
                                 @foreach ($priority as $prio)
                                     <option value="{{ $prio->id }}">{{ $prio->name }}</option>
                                 @endforeach
@@ -154,6 +153,7 @@
                         <div class="form-group col-md-6">
                             <label for="publish">Publish</label>
                             <select name="publish" class="form-control" id="publish">
+                                <option value="2">Finished</option>
                                 <option value="1">Publish</option>
                                 <option value="0">Draft</option>
                             </select>
@@ -251,12 +251,12 @@
 
 <script>
 $(document).ready(function () {
-    // Open Modal when validation errors 
+    // Open Modal when validation errors
     @if(Session::has('errors'))
     $('#inputModal').modal('show');
     @endif
 
-    // For initiate Ckeditor
+    // For initialize Ckeditor
     CKEDITOR.replace('description');
 
     /* initialize the external events
@@ -283,10 +283,8 @@ $(document).ready(function () {
         });
     }
 
-
-
     initEvent();
-    /* initialize the calendar
+    /* initialize the fullcalendar plugin
     -----------------------------------------------------------------*/
 
     var newDate = new Date(),
@@ -305,9 +303,10 @@ $(document).ready(function () {
         droppable: true,
         editable: true,
         eventLimit: true,
+        displayEventTime: false,
         // allow "more" link when too many events
         drop: function (date, jsEvent, ui) {
-            // 
+
         },
         events: [
             @foreach($event as $e) {
@@ -338,7 +337,7 @@ $(document).ready(function () {
 
             var priority_id = 1;
             if (event.title == "ALL") {
-                priority_id = 0;
+                priority_id = 5;
             }
             if (event.title == "Proposal") {
                 priority_id = 1;
@@ -367,6 +366,7 @@ $(document).ready(function () {
         }
     });
 
+    // change label on event's type change
     $('#type').change(function () {
         var type = $(this).val();
         if (type == 'online') {
@@ -451,6 +451,6 @@ $(document).ready(function () {
             thumbnailElement.style.backgroundImage = null;
         }
     }
-}); 
+});
 </script>
 @endsection

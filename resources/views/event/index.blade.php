@@ -145,23 +145,24 @@
                                         <td class="collection-item">
                                             @role('inkubator')
                                             <div class="font-weight-bold"><a
-                                                    href="/inkubator/event/{{ $item->slug }}">{{ str_limit($item->title, 50)  }}</a>
+                                                    href="/inkubator/event/{{ $item->slug }}">{{ str_limit($item->title,
+                                                    50) }}</a>
                                             </div>
                                             @endrole
                                             @role('mentor')
-                                            <div class="font-weight-bold"><a
-                                                    href="/mentor/event/{{ $item->slug }}">{{ str_limit($item->title, 50)  }}</a></div>
+                                            <div class="font-weight-bold"><a href="/mentor/event/{{ $item->slug }}">{{
+                                                    str_limit($item->title, 50) }}</a></div>
                                             @endrole
                                             @role('tenant')
-                                            <div class="font-weight-bold"><a
-                                                    href="/tenant/event/{{ $item->slug }}">{{ str_limit($item->title, 50)  }}</a></div>
+                                            <div class="font-weight-bold"><a href="/tenant/event/{{ $item->slug }}">{{
+                                                    str_limit($item->title, 50) }}</a></div>
                                             @endrole
                                             <div class="text-muted"></div>
                                         </td>
                                         {{-- @role(['mentor', 'inkubator']) --}}
                                         <td class="custom-align">
                                             <div class="btn-group">
-                                                @if(!isset($item->priority->id))
+                                                @if($item->priority->id == 5)
                                                 <span class="badge badge-info">
                                                     semua priority
                                                 </span>
@@ -195,34 +196,24 @@
                                                 @endif
                                             </div>
                                         </td>
-                                        {{-- @endrole --}}
-                                        {{-- <td class="custom-align">
-                                            <div class="btn-group">
-                                                @if ( $item->type == 'online' )
-                                                <button class="btn btn-primary custom-btn btn-sm" type="button">
-                                                    Online
-                                                </button>
-                                                @else
-                                                <button class="btn btn-secondary custom-btn btn-sm" type="button">
-                                                    Offline
-                                                </button>
-                                                @endif
-                                            </div>
-                                        </td> --}}
                                         <td class="custom-align">
                                             <div class="d-inline-flex align-items-center calendar align-middle"><i
-                                                    class="i-Calendar-4"></i><span>&nbsp;{{ $item->start_date->format("d M Y") }}</span>
+                                                    class="i-Calendar-4"></i><span>&nbsp;{{ $item->start_date->format("d
+                                                    M Y") }}</span>
                                             </div><br>
                                             <div class="d-inline-flex align-items-center calendar align-middle"><i
-                                                    class="i-Clock"></i><span>&nbsp;{{ $item->start_time->format("H:i") }}</span>
+                                                    class="i-Clock"></i><span>&nbsp;{{ $item->start_time->format("H:i")
+                                                    }}</span>
                                             </div>
                                         </td>
                                         <td class="custom-align">
                                             <div class="d-inline-flex align-items-center calendar align-middle"><i
-                                                    class="i-Calendar-4"></i><span>{{ $item->end_date->format("d M Y") }}</span>
+                                                    class="i-Calendar-4"></i><span>{{ $item->end_date->format("d M Y")
+                                                    }}</span>
                                             </div><br>
                                             <div class="d-inline-flex align-items-center calendar align-middle"><i
-                                                    class="i-Clock"></i><span>{{ $item->end_time->format("H:i") }}</span>
+                                                    class="i-Clock"></i><span>{{ $item->end_time->format("H:i")
+                                                    }}</span>
                                             </div>
                                         </td>
                                         @role('inkubator')
@@ -234,16 +225,20 @@
                                             @elseif ($item->publish == 0)
                                             <button class="btn btn-sm btn-warning">Draft</button>
                                             @endif
-                                            {{-- {!! $item->publish == 1 ? '<button class="btn btn-sm btn-primary">Published</button>' : '<button class="btn btn-sm btn-warning">Draft</button>' !!} --}}
+                                            {{-- {!! $item->publish == 1 ? '<button
+                                                class="btn btn-sm btn-primary">Published</button>' : '<button
+                                                class="btn btn-sm btn-warning">Draft</button>' !!} --}}
                                         </td>
                                         @endrole
                                         <td class="custom-align">
-                                            <div class="d-inline-flex align-items-center calendar align-middle"><span>{{ $item->updated_at->format("d M Y") }}</span></div>
+                                            <div class="d-inline-flex align-items-center calendar align-middle"><span>{{
+                                                    $item->updated_at->format("d M Y") }}</span></div>
                                         </td>
                                         @role('inkubator')
                                         <td><a class="ul-link-action text-success"
                                                 href="/inkubator/event/{{ $item->slug }}/edit" data-toggle="tooltip"
-                                                data-placement="top" title="Edit"><i class="nav-icon i-Pen-2 font-weight-bold"></i></a><a
+                                                data-placement="top" title="Edit"><i
+                                                    class="nav-icon i-Pen-2 font-weight-bold"></i></a><a
                                                 class="ul-link-action text-danger mr-1 hapus"
                                                 href="/inkubator/event/{{ $item->slug }}/delete" data-toggle="tooltip"
                                                 data-placement="top" title="Want To Delete !!!"><i
@@ -400,60 +395,60 @@
             max-width: 300px;
         }
 
-    .drop-zone {
-        max-width: 800px;
-        width: 100%;
-        height: 200px;
-        padding: 25px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-family: "Quicksand", sans-serif;
-        font-weight: 500;
-        font-size: 20px;
-        cursor: pointer;
-        color: #cccccc;
-        border: 4px dashed #663399;
-        border-radius: 10px;
-      }
-
-      .drop-zone--over {
-        border-style: solid;
-      }
-
-      .drop-zone__input {
-        display: none;
-      }
-
-      .drop-zone__thumb {
-        width: 80%;
-        height: 100%;
-        border-radius: 10px;
-        overflow: hidden;
-        background-color: #cccccc;
-        background-size: cover;
-        position: relative;
-      }
-
-      .drop-zone__thumb::after {
-        content: attr(data-label);
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 5px 0;
-        color: #ffffff;
-        background: rgba(0, 0, 0, 0.75);
-        font-size: 14px;
-        text-align: center;
-      }
-
-      th, td {
-          overflow:hidden; white-space:nowrap
+        .drop-zone {
+            max-width: 800px;
+            width: 100%;
+            height: 200px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: "Quicksand", sans-serif;
+            font-weight: 500;
+            font-size: 20px;
+            cursor: pointer;
+            color: #cccccc;
+            border: 4px dashed #663399;
+            border-radius: 10px;
         }
 
+        .drop-zone--over {
+            border-style: solid;
+        }
 
+        .drop-zone__input {
+            display: none;
+        }
+
+        .drop-zone__thumb {
+            width: 80%;
+            height: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #cccccc;
+            background-size: cover;
+            position: relative;
+        }
+
+        .drop-zone__thumb::after {
+            content: attr(data-label);
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 5px 0;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.75);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        th,
+        td {
+            overflow: hidden;
+            white-space: nowrap
+        }
     </style>
     @endsection
 
@@ -469,13 +464,16 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script>
-        $(function () {
+    $(function () {
+        // Show modal when there's validation errors
         @if(Session::has('errors'))
-            $('#inputModal').modal('show');
+        $('#inputModal').modal('show');
         @endif
 
+        // Init modal
         $('#inputModal').appendTo("body")
 
+        // Initialize datatable
         $('#names').DataTable(
             {
                 "pagingType": "numbers",
@@ -489,6 +487,7 @@
             }
         );
 
+        // Show confirmation dialog when delete button is clicked
         $('.hapus').on('click', function (event) {
             event.preventDefault();
             const url = $(this).attr('href');
@@ -510,14 +509,10 @@
                 }
             });
         });
-
+        // initialize ckeditor
         CKEDITOR.replace('description');
 
-        $(".custom-file-input").on("change", function() {
-            var fileName = $(this).val().split("\\").pop();
-            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
-        });
-
+        // Change label on event's type input
         $('#type').change(function() {
             var type = $(this).val();
             if(type == 'online') {
@@ -531,9 +526,8 @@
                 // var title = "Detail Alamat";
             }
         });
-    });
 
-    $(function() {
+        // daterangepicker script
         $('input[name="daterange"]').daterangepicker({
             opens: 'right',
             autoUpdateInput: false,
@@ -547,7 +541,7 @@
             cancelLabel: 'Clear'
             },
         }, function(start, end, label) {
-        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
         $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(picker.startDate.format('DD MMM YYYY') + ' - ' + picker.endDate.format('DD MMM YYYY'));
@@ -556,6 +550,8 @@
             $(this).val('');
         });
     });
+
+    // filter data event script
     function getIds(checkboxName) {
         let checkBoxes = document.getElementsByName(checkboxName);
         let ids = Array.prototype.slice.call(checkBoxes)
@@ -587,9 +583,11 @@
         document.location.href=href;
     }
     document.getElementById("filter").addEventListener("click", filterResults);
+    // filter event script end
+
+    // toaster script
     toastr.options = {
         "debug": false,
-        //   "positionClass": "toast-bottom-full-width",
         "onclick": null,
         "showMethod": "slideDown",
         "hideMethod": "slideUp",
@@ -618,76 +616,71 @@
     }
     @endif
 
+    // initialize dropzone input
     document.querySelectorAll(".drop-zone__input").forEach((inputElement) => {
-    const dropZoneElement = inputElement.closest(".drop-zone");
+        const dropZoneElement = inputElement.closest(".drop-zone");
 
-    dropZoneElement.addEventListener("click", (e) => {
-      inputElement.click();
+        dropZoneElement.addEventListener("click", (e) => {
+            inputElement.click();
+        });
+
+        inputElement.addEventListener("change", (e) => {
+        if (inputElement.files.length) {
+            updateThumbnail(dropZoneElement, inputElement.files[0]);
+        }
+        });
+
+        dropZoneElement.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZoneElement.classList.add("drop-zone--over");
+        });
+
+        ["dragleave", "dragend"].forEach((type) => {
+            dropZoneElement.addEventListener(type, (e) => {
+                dropZoneElement.classList.remove("drop-zone--over");
+            });
+        });
+
+        dropZoneElement.addEventListener("drop", (e) => {
+            e.preventDefault();
+
+            if (e.dataTransfer.files.length) {
+                inputElement.files = e.dataTransfer.files;
+                updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+            }
+
+            dropZoneElement.classList.remove("drop-zone--over");
+        });
     });
 
-    inputElement.addEventListener("change", (e) => {
-      if (inputElement.files.length) {
-        updateThumbnail(dropZoneElement, inputElement.files[0]);
-      }
-    });
+    function updateThumbnail(dropZoneElement, file) {
+        let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
 
-    dropZoneElement.addEventListener("dragover", (e) => {
-      e.preventDefault();
-      dropZoneElement.classList.add("drop-zone--over");
-    });
+        // First time - remove the prompt
+        if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+            dropZoneElement.querySelector(".drop-zone__prompt").remove();
+        }
 
-    ["dragleave", "dragend"].forEach((type) => {
-      dropZoneElement.addEventListener(type, (e) => {
-        dropZoneElement.classList.remove("drop-zone--over");
-      });
-    });
+        // First time - there is no thumbnail element, so lets create it
+        if (!thumbnailElement) {
+            thumbnailElement = document.createElement("div");
+            thumbnailElement.classList.add("drop-zone__thumb");
+            dropZoneElement.appendChild(thumbnailElement);
+        }
 
-    dropZoneElement.addEventListener("drop", (e) => {
-      e.preventDefault();
+        thumbnailElement.dataset.label = file.name;
 
-      if (e.dataTransfer.files.length) {
-        inputElement.files = e.dataTransfer.files;
-        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-      }
+        // Show thumbnail for image files
+        if (file.type.startsWith("image/")) {
+            const reader = new FileReader();
 
-      dropZoneElement.classList.remove("drop-zone--over");
-    });
-  });
-
-  /**
-   * Updates the thumbnail on a drop zone element.
-   *
-   * @param {HTMLElement} dropZoneElement
-   * @param {File} file
-   */
-  function updateThumbnail(dropZoneElement, file) {
-    let thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb");
-
-    // First time - remove the prompt
-    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-      dropZoneElement.querySelector(".drop-zone__prompt").remove();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
+            };
+        } else {
+            thumbnailElement.style.backgroundImage = null;
+        }
     }
-
-    // First time - there is no thumbnail element, so lets create it
-    if (!thumbnailElement) {
-      thumbnailElement = document.createElement("div");
-      thumbnailElement.classList.add("drop-zone__thumb");
-      dropZoneElement.appendChild(thumbnailElement);
-    }
-
-    thumbnailElement.dataset.label = file.name;
-
-    // Show thumbnail for image files
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
-
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        thumbnailElement.style.backgroundImage = `url('${reader.result}')`;
-      };
-    } else {
-      thumbnailElement.style.backgroundImage = null;
-    }
-  }
     </script>
     @endsection

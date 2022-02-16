@@ -8,11 +8,6 @@
             @csrf
           <div class="form-group">
               <div class="col">
-                {{-- <div class="drop-zone">
-                  <span class="drop-zone__prompt"><img src="{{asset("storage/". $event->foto)}}"></span>
-                  <input type="file" name="foto" id="exampleInputFile" for="exampleInputFile"
-                      class="drop-zone__input">
-                </div> --}}
                 <div class="drop-zone mx-auto">
                     <span class="drop-zone__prompt" ><img src="{{asset("storage/". $event->foto)}}"></span>
                     <input type="file" name="foto" id="exampleInputFile" for="exampleInputFile" class="drop-zone__input" value="{{$event->foto}}">
@@ -62,7 +57,6 @@
             <div class="form-group col-md-6">
                 <label for="priority">Priority</label>
                 <select class="form-control" name="priority_id" id="priority_id">
-                <option value="0">ALL</option>
                 @foreach ($priority as $prio)
                     <option value="{{ $prio->id }}" {{ $event->priority_id == $prio->id ? ' selected' : '' }}>{{ $prio->name }}</option>
                 @endforeach
@@ -143,6 +137,7 @@
 @section('js')
 <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
 <script>
+    // initialize ckeditor
     CKEDITOR.replace('description');
 
     // $('#type').change(function() {
