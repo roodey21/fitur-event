@@ -137,40 +137,9 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        //code Hanafi and i mean is gorgoes
-        // $attr = $request->all();
-        // $waitslug = Str::slug(request('title'));
-        // $cek = Event::where('slug',$waitslug)->first();
-        // if ($waitslug == $cek->slug) {
-        //     # code...
-        //     $useSlug = Str::slug($this->slug.' '.Str::random(4));
-        // }else{
-        //     $useSlug = $waitslug;
-        // }
-        // $attr['slug'] = $useSlug;
-        // $attr['author_id'] = Auth::user()->id;
-        // $attr['inkubator_id'] = Auth::user()->inkubator_id;
-
-        // if($attr['priority_id']==0){
-        //     $attr['priority_id']=null;
-        // }
-
-        // $foto = request()->file('foto');
-        // $fotoUrl = $foto->storeAs("image/event", "{$useSlug}.{$foto->extension()}");
-        // $attr['foto'] = $fotoUrl;
-
-        // Event::create($attr);
-
-        // $notification = array(
-        //     'message' => 'Event Baru Berhasil Ditambah',
-        //     'alert-type' => 'success'
-        // );
-
-        // return redirect()->to('/inkubator/event')->with($notification);
-        // -------------end line--------------
-        
         $attr = $request->all();
-        $slug = Str::slug(request('title'));
+        
+        $slug = \Str::slug(request('title'));
         $attr['slug'] = $slug;
         $attr['author_id'] = Auth::user()->id;
         $attr['inkubator_id'] = Auth::user()->inkubator_id;
@@ -190,30 +159,13 @@ class EventController extends Controller
             'message' => 'Event Baru Berhasil Ditambah',
             'alert-type' => 'success'
         );
-
-        return redirect()->to('/inkubator/event')->with($notification);
+        $refs = request()->headers->get('referer');
+        if($refs == $request->getSchemeAndHttpHost().'/inkubator/event'){
+            return redirect()->to('/inkubator/event')->with($notification);
+        } elseif ($refs == $request->getSchemeAndHttpHost().'/inkubator/calendar') {
+            return redirect()->to('/inkubator/calendar')->with($notification);
+        }
     }
-
-    // public function storeMedia(Request $request)
-    // {
-
-    //     $path = storage_path('tmp/uploads');
-
-    //     if (!file_exists($path)) {
-    //         mkdir($path, 0777, true);
-    //     }
-
-    //     $file = $request->file('file')->getClientOriginalName();
-
-
-    //     $file->move($path, $name);
-
-    //     return response()->json([
-    //         'name'          => $file,
-    //         'original_name' => $file->getClientOriginalName(),
-    //     ]);
-    // }
-
     public function edit(Event $event)
     {
         $priority = Priority::all();

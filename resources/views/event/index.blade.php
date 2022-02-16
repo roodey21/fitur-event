@@ -292,16 +292,9 @@
                             <label for="foto">File</label>
                             <div class="input-group mb-3">
                                 <div class="drop-zone">
-                                    {{-- <span class="drop-zone__prompt"><img
-                                            src="{{asset('img/profile/inkubator/'. $data->photo)}}"></span> --}}
                                     <input type="file" name="foto" id="exampleInputFile" for="exampleInputFile"
                                         class="drop-zone__input">
                                 </div>
-                                {{-- <div class="custom-file">
-                                    <label class="custom-file-label" for="foto">Choose file</label>
-                                    <input class="custom-file-input" id="foto" type="file" name="foto"
-                                        onchange="preview_image(event)" accept="image/*" />
-                                </div> --}}
                             </div>
                         </div>
                         <div class="wrapper">

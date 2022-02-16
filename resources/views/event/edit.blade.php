@@ -71,7 +71,7 @@
             <div class="form-group col-md-6">
                 <label for="publish">Publish</label>
                 <select name="publish" class="form-control" id="publish">
-                <option value="1" {{ $event->publish == 2 ? ' selected ' : '' }}>Finished</option>
+                <option value="2" {{ $event->publish == 2 ? ' selected ' : '' }}>Finished</option>
                 <option value="1" {{ $event->publish == 1 ? ' selected ' : '' }}>Publish</option>
                 <option value="0" {{ $event->publish == 0 ? ' selected ' : '' }}>Draft</option>
                 </select>

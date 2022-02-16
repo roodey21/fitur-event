@@ -10,7 +10,7 @@ class frontendController extends Controller
 {
     public function find(Event $event){
         $data = $event;
-        $relationalEvent = $event->priority->event->load('priority')->where('publish', '1')->whereNotIn('id',[$data->id])->take(4);
+        $relationalEvent = $data->priority->event->load('priority')->where('publish', '1')->whereNotIn('id',[$data->id])->take(4);
         $random = Event::with('priority')->where([
                 ['publish','=', '1'],
                 ['priority_id','!=',$data->priority->id]

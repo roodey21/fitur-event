@@ -77,7 +77,6 @@
 		<script src="{{ asset('theme/js/plugins/feather.min.js')}}"></script>
 		<script src="{{ asset('theme/js/plugins/metisMenu.min.js')}}"></script>
         <script src="{{ asset('theme/js/scripts/layout-sidebar-vertical.min.js')}}"></script>
-        <script src="{{ asset('theme/js/dropzone.js')}}"></script>
 		@yield('js')
 
 		<script>
