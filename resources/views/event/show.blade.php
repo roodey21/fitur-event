@@ -34,7 +34,7 @@
                     <dt>Lokasi event</dt>
                     <dd>{{ $event->location }}</dd>
                     <dt>Priority event</dt>
-                    <dt><span class="badge {{ $event->priority_id == 1 ? 'badge-success':'' }}{{ $event->priority_id == 2 ? 'badge-primary':'' }}{{ $event->priority_id == 3 ? 'badge-warning':'' }}{{ $event->priority_id == 4 ? 'badge-danger':'' }}">{{ $event->priority->name }}</span></dt>
+                    <dt><span class="badge {{ $event->priority_id == 1 ? 'badge-success':'' }}{{ $event->priority_id == 2 ? 'badge-primary':'' }}{{ $event->priority_id == 3 ? 'badge-warning':'' }}{{ $event->priority_id == 4 ? 'badge-danger':'' }}">{{ $event->priority->name  ?? 'Semua Priority'}}</span></dt>
                   </dl>
             </div>
         </div>

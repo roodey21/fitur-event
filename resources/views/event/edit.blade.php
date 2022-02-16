@@ -62,7 +62,7 @@
             <div class="form-group col-md-6">
                 <label for="priority">Priority</label>
                 <select class="form-control" name="priority_id" id="priority_id">
-                <option value="0">--!!--</option>
+                <option value="0">ALL</option>
                 @foreach ($priority as $prio)
                     <option value="{{ $prio->id }}" {{ $event->priority_id == $prio->id ? ' selected' : '' }}>{{ $prio->name }}</option>
                 @endforeach
@@ -71,6 +71,7 @@
             <div class="form-group col-md-6">
                 <label for="publish">Publish</label>
                 <select name="publish" class="form-control" id="publish">
+                <option value="1" {{ $event->publish == 2 ? ' selected ' : '' }}>Finished</option>
                 <option value="1" {{ $event->publish == 1 ? ' selected ' : '' }}>Publish</option>
                 <option value="0" {{ $event->publish == 0 ? ' selected ' : '' }}>Draft</option>
                 </select>

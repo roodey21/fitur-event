@@ -25,16 +25,19 @@
 			<div class="card-body">
 				<div class="create_event_wrap">
 					<ul class="list-group" id="external-events">
-						<li class="list-group-item bg-success fc-event">
-							Proposal
+            <li class="list-group-item bg-secondary fc-event">
+							ALL
 						</li>
 						<li class="list-group-item bg-primary fc-event">
+							Proposal
+						</li>
+						<li class="list-group-item bg-danger fc-event">
 							Pra Start Up
 						</li>
 						<li class="list-group-item bg-warning fc-event">
 							Start Up
 						</li>
-						<li class="list-group-item bg-danger fc-event">
+						<li class="list-group-item bg-success fc-event">
 							Scale Up
 						</li>
 					</ul>
@@ -131,6 +134,7 @@
                         <div class="form-group col-md-6">
                             <label for="priority">Priority</label>
                             <select class="form-control" name="priority_id" id="priority_id">
+                              <option value="0">ALL</option>
                                 @foreach ($priority as $prio)
                                     <option value="{{ $prio->id }}">{{ $prio->name }}</option>
                                 @endforeach
@@ -281,6 +285,9 @@ $('#calendar').fullCalendar({
   eventClick: function(event){
 	
 	var priority_id = 1;
+  if (event.title == "ALL") {
+		priority_id = 0;
+	}
 	if (event.title == "Proposal") {
 		priority_id = 1;
 	} 

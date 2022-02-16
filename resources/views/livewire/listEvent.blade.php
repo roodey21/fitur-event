@@ -255,7 +255,7 @@
                                             <div class="mb-2 text-muted">{{ date('j M',strtotime($item->start_date)) }}
                                                 -
                                                 {{date('j M Y',strtotime($item->start_date))}}</div>
-                                            <div class="mb-2 text-warning font-weight-bold">{{$item->priority->name}}
+                                            <div class="mb-2 text-warning font-weight-bold">{{$item->priority->name ?? "Semua Priority"}}
                                             </div>
                                         </div>
                                         <hr>
