@@ -245,7 +245,9 @@
                                         <div data-crop-image="">
                                             <img alt="image" src="{{asset('storage/'.$item->foto)}}"
                                                 class="card-img-top"
-                                                style="height:130px;object-fit:fill;object-position: center;">
+                                                style="width: 100%;
+                                                height: 15vw;
+                                                object-fit: cover;">
                                         </div>
                                         {{-- </a> --}}
                                     </div>

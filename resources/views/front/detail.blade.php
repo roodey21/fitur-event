@@ -39,13 +39,19 @@
                 <div class="col-12 col-sm-12 col-12">
                     <div class="card rounded-lg border border-secondary">
                         <div class="chocolat-parent">
-                            {{-- <a href="{{asset('storage/'.$data->foto)}}" class="chocolat-image" title="Just an
-                            example"> --}}
-                            <div data-crop-image="">
-                                <img src="{{asset('storage/'.$data->foto)}}" class="img-fluid w-100"
-                                    alt="Responsive image" style="max-height: 426px;object-fit: fill;">
-                            </div>
-                            </a>
+                        
+      
+                            <figure>
+                                <img src="{{asset('storage/'.$data->foto)}}" 
+                                    alt="Responsive image" style="box-sizing: border-box;
+                                    width: 100%;
+                                    max-width: 100%;
+                                    height: 60vh;
+                                    object-fit: contain;
+                                    object-position: center">
+                            </figure>
+                            
+                           
                         </div>
                         <div class="container">
                             <div class="card-body">
@@ -137,7 +143,7 @@
                                         <div data-crop-image="">
                                             <img alt="image" src="{{asset('storage/'.$berkaiten->foto)}}"
                                                 class="card-img-top"
-                                                style="height:130px;object-fit:fill;object-position: center;">
+                                                style="height:130px;object-fit:cover;object-position: center;">
                                         </div>
                                         {{-- </a> --}}
                                     </div>
@@ -179,7 +185,7 @@
                                         <div data-crop-image="">
                                             <img alt="image" src="{{asset('storage/'.$item->foto)}}"
                                                 class="card-img-top"
-                                                style="height:130px;object-fit:fill;object-position: center;">
+                                                style="height:130px;object-fit:cover;object-position: center;">
                                         </div>
                                         {{-- </a> --}}
                                     </div>

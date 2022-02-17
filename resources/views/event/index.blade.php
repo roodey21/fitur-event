@@ -164,7 +164,7 @@
                                             <div class="btn-group">
                                                 @if($item->priority->id == 5)
                                                 <span class="badge badge-info">
-                                                    semua priority
+                                                    {{ $item->priority->name }}
                                                 </span>
                                                 @elseif ( $item->priority->id == 1 )
                                                 <span class="badge badge-primary">
@@ -238,8 +238,8 @@
                                         <td><a class="ul-link-action text-success"
                                                 href="/inkubator/event/{{ $item->slug }}/edit" data-toggle="tooltip"
                                                 data-placement="top" title="Edit"><i
-                                                    class="nav-icon i-Pen-2 font-weight-bold"></i></a><a
-                                                class="ul-link-action text-danger mr-1 hapus"
+                                                    class="nav-icon i-Pen-2 font-weight-bold"></i></a>
+                                                <a class="ul-link-action text-danger mr-1 hapus"
                                                 href="/inkubator/event/{{ $item->slug }}/delete" data-toggle="tooltip"
                                                 data-placement="top" title="Want To Delete !!!"><i
                                                     class="nav-icon i-Close-Window font-weight-bold"></i></a>
@@ -352,7 +352,6 @@
                                     @foreach ($priority as $prio)
                                     <option value="{{ $prio->id }}">{{ $prio->name }}</option>
                                     @endforeach
-                                    <option value="0">Semua Priority</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
@@ -488,7 +487,7 @@
         );
 
         // Show confirmation dialog when delete button is clicked
-        $('.hapus').on('click', function (event) {
+        $('#names').on('click', '.hapus',function (event) {
             event.preventDefault();
             const url = $(this).attr('href');
             swal({

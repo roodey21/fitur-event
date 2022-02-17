@@ -14,7 +14,7 @@ class Event extends Model
 
     public function priority()
     {
-        return $this->belongsTo(Priority::class)->withDefault(['name'=>'Semua Priority']);
+        return $this->belongsTo(Priority::class);
     }
 
     public function scopeDateBetween($query, $start, $end)

@@ -56,7 +56,7 @@ class EventController extends Controller
                 AllowedFilter::exact('publish', 'publish'),
                 AllowedFilter::scope('between', 'dateBetween'),
             ])
-            ->latest()->paginate();
+            ->latest()->get();
         return view('event.index', compact('event', 'priority', 'exp', 'title'));
     }
 
@@ -99,7 +99,7 @@ class EventController extends Controller
         $event = Event::where([
             ['inkubator_id', '=', Auth::user()->inkubator_id],
             ['priority_id', '=', $tenant->priority_id],
-            ['publish', '=', 1]
+            ['publish', '=', '1']
         ])->latest()->paginate();
 
         return view('/event/index', compact('event'));
@@ -139,7 +139,7 @@ class EventController extends Controller
     {
         $attr = $request->all();
 
-        $slug = \Str::slug(request('title'));
+        $slug = Str::slug(request('title'));
         $attr['slug'] = $slug;
         $attr['author_id'] = Auth::user()->id;
         $attr['inkubator_id'] = Auth::user()->inkubator_id;
@@ -159,12 +159,9 @@ class EventController extends Controller
             'message' => 'Event Baru Berhasil Ditambah',
             'alert-type' => 'success'
         );
-        $refs = request()->headers->get('referer');
-        if($refs == $request->getSchemeAndHttpHost().'/inkubator/event'){
-            return redirect()->to('/inkubator/event')->with($notification);
-        } elseif ($refs == $request->getSchemeAndHttpHost().'/inkubator/event/calendar') {
-            return redirect()->to('/inkubator/event/calendar')->with($notification);
-        }
+        
+        // return redirect()->to('/inkubator/event')->with($notification);
+        return redirect()->back()->with($notification);
     }
     public function edit(Event $event)
     {

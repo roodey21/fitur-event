@@ -90,7 +90,7 @@
                         @foreach ($event as $itemevent)
                         <div class="col-12 col-md-4 px-2 d-flex">
                             <div class="card mb-3 flex-fill" style="">
-                                <img class="card-img-top" src="{{asset('storage/'.$itemevent->foto)}}" alt="Card image cap">
+                                <img class="card-img-top" src="{{asset('storage/'.$itemevent->foto)}}" alt="Card image cap" >
                                 <div class="card-body">
                                     {{-- <a href=""class="card-title"{{$itemevent->title}}></a> --}}
                                     {{-- <h5 href="{{route('event.details', $itemevent->id)}}" class="card-title">
