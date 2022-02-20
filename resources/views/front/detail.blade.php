@@ -42,7 +42,7 @@
                         
       
                             <figure>
-                                <img src="{{asset('storage/'.$data->foto)}}" 
+                                <img src="{{asset('storage/'.$data->foto)}}" class="mt-3"
                                     alt="Responsive image" style="box-sizing: border-box;
                                     width: 100%;
                                     max-width: 100%;

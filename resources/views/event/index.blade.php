@@ -186,7 +186,7 @@
                                             </div>
                                             <div class="btn-group">
                                                 @if ( $item->type == 'online' )
-                                                <span class="badge badge-primary">
+                                                <span class="badge badge-success">
                                                     Online
                                                 </span>
                                                 @elseif ($item->type == 'offline')
@@ -272,11 +272,11 @@
                 <div class="modal-body">
                     <!-- form input modal -->
                     <form action={{ route('inkubator.event.store') }} method="post" autocomplete="off"
-                        enctype="multipart/form-data">
+                        enctype="multipart/form-data" class="needs-validation">
                         @csrf
                         <div class="form-group">
                             <label for="title">Title</label>
-                            <input type="text" name="title" class="form-control" placeholder="title" required>
+                            <input type="text" name="title" class="form-control " placeholder="title" value="{{ old('title') }}" required >
                             @error('title')
                             <div class="mt-2 text-danger">
                                 {{ $message }}
@@ -297,7 +297,10 @@
                         </div>
                         <div class="form-group">
                             <label for="description">Deskripsi Event</label>
-                            <textarea name="description" id="description" required class="form-control"></textarea>
+                            <textarea name="description" id="description"  class="form-control" required>{{ old('description') }}</textarea>
+                            <div class="mt-2 text-danger error">
+                                The description field cannot be empty
+                            </div>
                             @error('description')
                             <div class="mt-2 text-danger">
                                 {{ $message }}
@@ -308,8 +311,8 @@
                             <div class="form-group col-md-6">
                                 <label for="tgl_mulai">Tanggal Mulai :</label>
                                 <div class="input-group">
-                                    <input type="date" name="start_date" class="form-control" id="start_date" required>
-                                    <input type="time" name="start_time" class="form-control" id="start_time" required>
+                                    <input type="date" name="start_date" class="form-control" id="start_date" required value="{{ old('start_date') }}">
+                                    <input type="time" name="start_time" class="form-control" id="start_time" required value="{{ old('start_time') }}">
                                 </div>
                                 @error('start_date')
                                 <div class="mt-2 text-danger">
@@ -325,23 +328,33 @@
                             <div class="form-group col-md-6">
                                 <label for="tgl_selesai">Tanggal Selesai</label>
                                 <div class="input-group">
-                                    <input type="date" name="end_date" class="form-control" id="end_date" required>
-                                    <input type="time" name="end_time" class="form-control" id="end_time" required>
+                                    <input type="date" name="end_date" class="form-control" id="end_date" required value="{{ old('end_date') }}">
+                                    <input type="time" name="end_time" class="form-control" id="end_time" required value="{{ old('end_time') }}">
                                 </div>
+                                @error('end_date')
+                                <div class="mt-2 text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                                @error('end_time')
+                                <div class="mt-2 text-danger">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="type">Tipe Event</label>
                                 <select class="form-control" name="type" id="type">
-                                    <option value="offline">offline</option>
-                                    <option value="online">online</option>
+                                    <option value="offline" {{ old('type') == 'offline' ? 'selected' : '' }}>offline</option>
+                                    <option value="online" {{ old('type') == 'online' ? 'selected' : '' }}>online</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="location" id="locationLabel">Lokasi Event</label>
                                 <div class="input-group">
-                                    <input name="location" placeholder="lokasi event" class="form-control" required>
+                                    <input name="location" placeholder="lokasi event" class="form-control" required value="{{ old('location') }}">
                                 </div>
                             </div>
                         </div>
@@ -350,16 +363,16 @@
                                 <label for="priority">Priority</label>
                                 <select class="form-control" name="priority_id" id="priority_id">
                                     @foreach ($priority as $prio)
-                                    <option value="{{ $prio->id }}">{{ $prio->name }}</option>
+                                    <option value="{{ $prio->id }}" {{ old('priority_id') == $prio->id ? 'selected' : '' }}>{{ $prio->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="publish">Publish</label>
                                 <select name="publish" class="form-control" id="publish">
-                                    <option value="0">Draft</option>
-                                    <option value="1">Publish</option>
-                                    <option value="2">Finished</option>
+                                    <option value="0" {{ old('publish') == '0' ? 'selected' : '' }}>Draft</option>
+                                    <option value="1" {{ old('publish') == '0' ? 'selected' : '' }}>Publish</option>
+                                    <option value="2" {{ old('publish') == '0' ? 'selected' : '' }}>Finished</option>
                                 </select>
                             </div>
                         </div>
@@ -509,7 +522,14 @@
             });
         });
         // initialize ckeditor
-        CKEDITOR.replace('description');
+        $('.error').hide();
+        var editor = CKEDITOR.replace('description');
+            editor.on( 'required', function( evt ) {
+                $('.error').show();
+            evt.cancel();
+        });
+
+
 
         // Change label on event's type input
         $('#type').change(function() {
