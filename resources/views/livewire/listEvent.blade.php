@@ -1,13 +1,9 @@
 <div>
-    {{-- <div class="main-content"> --}}
         <section class="section mt-5">
             <div class="container mt-5">
                 <div class="section-header">
                     <h1>Event Siskubis</h1>
                     <div class="section-header-breadcrumb">
-                        {{-- <div class="breadcrumb-item active"><a href="#">Home</a></div>
-                        <div class="breadcrumb-item"><a href="#">Layout</a></div>
-                        <div class="breadcrumb-item">Top Navigation</div> --}}
                     </div>
                 </div>
             </div>
@@ -35,9 +31,6 @@
                                         <p class="card-text">
                                             @isset($filter)
                                             @switch($filter)
-                                            @case(0)
-                                            Semua Priority
-                                            @break
                                             @case(1)
                                             Proposal
                                             @break
@@ -50,6 +43,9 @@
                                             @case(4)
                                             Scale Up
                                             @break
+                                            @case(5)
+                                            Semua Tenant
+                                            @break
                                             @default
                                             @endswitch
                                             @endisset
@@ -58,13 +54,7 @@
                                     <div class="collapse" id="mycard-collapse1">
                                         <div class="form-group">
                                             <div class="container">
-                                              <label class="">
-                                                    <input type="radio" wire:model.debounce.100ms="filter" value="all"
-                                                        class="selectgroup-input">
-                                                    <span class="selectgroup-button">Semua Priority</span>
-                                                </label>
                                                 @foreach ($category as $item)
-
                                                 <label class="">
                                                     <input type="radio" wire:model.debounce.100ms="filter"
                                                         value="{{$item->id}}" class="selectgroup-input">
@@ -226,7 +216,7 @@
                                         <div class="form-group">
                                             <input class="form-control" type="search" wire:model.debounce.100ms="search"
                                                 id="search" placeholder="Cari Event Seacara RealTime">
-                                            {{-- <button wire:click="cari" class="btn btn-primary d-blok"> Cari</button> --}}
+                                          
                                         </div>
                                     </div>
                                 </div>
@@ -238,10 +228,9 @@
                             @forelse ($event as $item)
                             <div class="col-12 col-sm-3 col-3">
                                 <div class="card shadow bg-white rounded-lg">
-                                    {{-- <div class="mb-2 text-muted">Click the picture below to see the magic!</div> --}}
+                                    
                                     <div class="chocolat-parent">
-                                        {{-- <a href="{{asset('storage/'.$item->foto)}}" class="chocolat-image"
-                                        title="{{$item->title}}"> --}}
+                                    
                                         <div data-crop-image="">
                                             <img alt="image" src="{{asset('storage/'.$item->foto)}}"
                                                 class="card-img-top"
@@ -249,7 +238,7 @@
                                                 height: 15vw;
                                                 object-fit: cover;">
                                         </div>
-                                        {{-- </a> --}}
+                                      
                                     </div>
                                     <div class="card-body">
                                         <p class="text-dark ">{{ Str::limit($item->title, 40, '...') }}</p>

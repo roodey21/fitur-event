@@ -16,13 +16,9 @@ class ListEvent extends Component
     
     protected function data()
     {
-        
         $model = Event::with('priority')
-            ->when($this->filter && $this->filter != 'all', function ($query) {
+            ->when($this->filter, function ($query) {
                 $query->where('priority_id', $this->filter);
-            })
-            ->when($this->filter == 'all', function ($query) {
-                $query->where('priority_id', 0);
             })
             ->when($this->status && $this->status !='all', function ($query) {
                 $query->where('type', $this->status);
@@ -63,11 +59,11 @@ class ListEvent extends Component
             ->when($this->waktu == "next-month", function ($query) {
                 $query->whereYear('start_date', date('Y'))->whereMonth('start_date', strtotime(today() . "+1 Month"));
             })->search($this->search);
-            
+
             if ($this->filter || $this->status || $this->waktu || strlen($this->search) > 3 ) {
                 # code...
                 $this->cek = false;
-                return $model->orderBy('start_date', 'desc')->orderByDesc('start_time')->where('publish', '1')->paginate(4);
+                return $model->orderBy('start_date', 'desc')->orderByDesc('start_time')->where('publish', '1')->paginate(8);
             }else{
                 $this->resetPage();
                 $this->cek = true;

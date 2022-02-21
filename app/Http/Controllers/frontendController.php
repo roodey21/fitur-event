@@ -10,11 +10,12 @@ class frontendController extends Controller
 {
     public function find(Event $event){
         $data = $event;
-        $relationalEvent = $data->priority->event->load('priority')->where('publish', '1')->whereNotIn('id',[$data->id])->take(4);
+        $relationalEvent = $data->priority->event->load('priority')->where('publish', '1')->whereNotIn('id',[$data->id])->take(4)->sortDesc();
         $random = Event::with('priority')->where([
                 ['publish','=', '1'],
-                ['priority_id','!=',$data->priority->id]
-            ])->take(4)->get();
+                ['priority_id','!=',$data->priority->id],
+                ['id','!=',$data->id]
+            ])->inRandomOrder()->take(4)->get();
         return view('front.detail',compact('data','relationalEvent','random'));
     }
 }
